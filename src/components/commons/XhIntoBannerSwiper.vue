@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="title-wrap">
-      <img class="popular-titlePic" :src="item.titlePic" alt="" />
+      <img class="popular-titlePic" :src="item.titlePic" alt="bigPic" />
     </div>
     <div class="swiper-container" id="intoBannerSwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(v,vId) in item.swiperSlide" :key="vId">
           <div class="itemList" v-for="(l,lId) in v.itemList" :key="lId">
             <div class="item-wrap">
-              <img class="book-pic" :src="l.img" alt />
+              <img class="book-pic" :src="l.img" alt="bookPic" />
               <span class="smallItem-name">{{l.name}}</span>
               <span class="book-price">{{l.price}}</span>
             </div>
