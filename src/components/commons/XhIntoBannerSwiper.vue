@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title-wrap">
-      <img class="popular-titlePic" :src="item.titlePic" alt />
+      <img class="popular-titlePic" :src="item.titlePic" alt="" />
     </div>
     <div class="swiper-container" id="intoBannerSwiper">
       <div class="swiper-wrapper">
