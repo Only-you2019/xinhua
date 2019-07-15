@@ -7,11 +7,13 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(v,vId) in item.swiperSlide" :key="vId">
           <div class="itemList" v-for="(l,lId) in v.itemList" :key="lId">
-            <div class="item-wrap">
-              <img class="book-pic" :src="l.img" alt="bookPic" />
-              <span class="smallItem-name">{{l.name}}</span>
-              <span class="book-price">{{l.price}}</span>
-            </div>
+            <router-link :to="path+'/'+l.id">
+              <div class="item-wrap">
+                <img class="book-pic" :src="l.img" alt="bookPic"/>
+                <span class="smallItem-name">{{l.name}}</span>
+                <span class="book-price">{{l.price}}</span>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -26,6 +28,11 @@ import Swiper from "swiper";
 export default {
   name: "XhIntoBannerSwiper",
   props: ["item"],
+  data(){
+    return {
+      path:"/XhProductDetail"
+    }
+  },
   mounted() {
     //在获取完数据后，将swiper放在$nextTick下一个UI帧再初始化。
     this.$nextTick(() => {
@@ -41,9 +48,9 @@ export default {
         loop: true, //循环
         observer: true, //动态获取资源时，需要加上这一句
         // observeParents: true,
-        autoplay: {
-          disableOnInteraction: false
-        },
+        // autoplay: {
+        //   disableOnInteraction: false
+        // },
         // 分页器
         pagination: {
           el: ".swiper-pagination",
