@@ -2,7 +2,7 @@
 	<div>
 		<div class="XhMyOrder-header">
 			<img src="../../static/images/mine/xhimg/jtz.png" @click="$router.back(-1)">
-			<span>评价中心</span>
+			<span>我的积分</span>
 			<router-link to="/XhRule"><span class="XhMyOrder-header-span">积分规则</span></router-link>
 		</div>
 		<div class="XhMyOrder-Bigbox">
@@ -37,13 +37,13 @@
 	}
 	.XhMyOrder-header img{
 		float: left;
-		width: .5rem;
-		height: .7rem;
-		margin-top: .3rem;
+		width: .3rem;
+		height: .5rem;
+		margin-top: .4rem;
 		margin-left: .2rem;
 	}
 	.XhMyOrder-header span{
-		font-size: 20px;
+		font-size: 16px;
 		line-height: 1.31rem;
 		color: #000;
 		text-align: center;

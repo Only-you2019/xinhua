@@ -13,9 +13,9 @@
 					<div class="FooterBoxInput-post">
 						<div></div>
 						<div></div>
-						<input @input="phoneCheck()" v-model="userPhone" type="text" placeholder="请输入手机号">
+						<input @blur="phoneCheck()" v-model="userPhone" type="text" placeholder="请输入手机号">
 						<input v-model="checkCoad"  type="text" placeholder="图片验证码">
-						<h1 @click="PicCheck()" class="picCode" >{{picCode}}</h1>
+						<img @click="PicCheck()" src="../assets/xhimg/piccoad.png" class="picCode" >
 						<input ref="Account" type="text" placeholder="短信验证码">
 						<button class="MessageCoad">发送验证码</button>
 						<input class="FooterBoxSign" @click="LoginPhonePost()" type="button" value="下一步">
@@ -34,7 +34,6 @@
 				userPhone:'',
 				PhoneMsg:'',
 				phone:'',
-				picCode:'DSWS',
 				checkCoad:''
 			}
 			
@@ -45,17 +44,19 @@
 				if(regPhone.test(this.userPhone)==true){
 					this.PhoneMsg=''
 					this.phone=1;
+				}else{
+					this.$toast("手机号格式错误！")
 				}
 			},
 			PicCheck(){
-				var newcode='';
-				var Array=["A","B","C","D","E","F","G","H","I","J","K","O","P"];
-				
-				for(var i=0;i<4;i++){
-					var index=Math.floor(Math.random()*10);
-					newcode+=Array[index]
-				}
-				this.picCode=newcode
+// 				var newcode='';
+// 				var Array=["A","B","C","D","E","F","G","H","I","J","K","O","P"];
+// 				
+// 				for(var i=0;i<4;i++){
+// 					var index=Math.floor(Math.random()*10);
+// 					newcode+=Array[index]
+// 				}
+// 				this.picCode=newcode
 			},
 			LoginPhonePost(){
 				if(this.phone==1&&this.picCode==this.checkCoad){
@@ -85,13 +86,10 @@
 		font-weight: 900;
 	}
 	.picCode{
-		 height: 1.1rem;
-		 line-height: 1.1rem;
-		 font-size: .5rem; 
-		 color: blue; 
+		 height: 1rem;
 		 position: absolute;
-		 top: 1rem; 
-		 left: 5.3rem;
+		 top: 1.1rem; 
+		 left: 5rem;
 	}
 	.MessageCoad{
 		height: .9rem;

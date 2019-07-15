@@ -1,8 +1,8 @@
 <template>
   <div class="XhNavPagesMain">
-    <div class="XhNavPagesMain-ImgWrapper">
-      <router-link to="/">
-        <img class="XhNavPagesMain-img" src="https://img1.xinhuashudian.com/images/2019/01/10/7f8e6ab7-d219-4808-8eb4-4affe1b26607.png?x-oss-process=image/resize,m_lfit,limit_0,h_424">
+    <div class="XhNavPagesMain-ImgWrapper" v-for="item of ImgUrls">
+      <router-link  to="/">
+        <img class="XhNavPagesMain-img" :src="item.image.src">
       </router-link>
     </div>
   </div>
@@ -10,7 +10,10 @@
 
 <script>
     export default {
-        name: "XhNavPagesMain"
+        name: "XhNavPagesMain",
+        props: {
+          ImgUrls: Array
+        }
     }
 </script>
 
@@ -22,5 +25,5 @@
   .XhNavPagesMain-img {
     width: 100%;
   }
-      
+
 </style>

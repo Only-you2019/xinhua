@@ -2,7 +2,7 @@
 <!--  首部-->
     <div>
       <div class="XhProductDetailtop">
-        <router-link to="/">
+        <router-link to="/XhClassify">
           <van-icon name="arrow-left" class="topiconXhProductDetailtop"/>
         </router-link>
         <div>

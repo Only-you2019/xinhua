@@ -6,14 +6,17 @@
             </router-link>
         </div>
         <div class="XhNavPagesHeader-text">
-            <p>图书销量排行榜</p>
+            <p>{{title}}</p>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "XhNavPagesHeader"
+        name: "XhNavPagesHeader",
+        props:{
+          title: String
+        }
     }
 </script>
 

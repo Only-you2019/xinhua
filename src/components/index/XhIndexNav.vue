@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/XhNavPages">
+  <router-link :to="item.path">
     <img :src="item.src" alt="">
     <p>{{item.title}}</p>
   </router-link>

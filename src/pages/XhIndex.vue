@@ -12,8 +12,8 @@
           <div class="index-nav">
             <ul class="flex">
               <li :key="index" v-for="(item,index) in indexNav">
-                <xh-index-nav :item="item"></xh-index-nav>
-              </li>
+              <xh-index-nav :item="item"></xh-index-nav>
+            </li>
             </ul>
           </div>
           <!--主题-->
@@ -144,13 +144,19 @@
                     index_obj["indexListBrach"]=array
                   }
                   this.indexListTheme.push(index_obj)
-                  // console.log(this.indexListTheme);
+                  console.log(this.indexListTheme);
                 };
                 //轮播图
                 this.indexSwipers=this.indexData[6].config.carousel.carouselItems
                 // console.log(this.indexSwipers);
                //导航
-                this.indexNav=this.indexData[5].config.leads
+                let index_nav=[]
+                index_nav=this.indexData[5].config.leads
+                // console.log(index_nav);
+                for(var i=0;i<index_nav.length;i++){
+                  index_nav[i].path=i==4?'/XhMine':'/XhNavPages';
+                }
+                this.indexNav=index_nav;
                 // console.log(this.indexNav);
                 //主题
                 this.indexTheme=this.indexData[3].config.data.children
@@ -220,8 +226,6 @@
                         "src":a.mainImage,
                         "tltle":item=="body_15"?a.itemName:a.name,
                         "price1":(a.lowPrice/100).toFixed(2),
-                        "tltle":a.name,
-                        "price1":a.lowPrice/100,
                         // "price2":a.highPrice
                       })
                       // this.indexSelect_cs.push(indexSelect_cs_per)

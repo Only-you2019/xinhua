@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Header -->
-        <Xh-nav-pages-header></Xh-nav-pages-header> 
+        <Xh-nav-pages-header :title="title"></Xh-nav-pages-header>
         <div class="XhThemePages-main">
             <!-- 单张图片 -->
             <Xh-theme-pages-img></Xh-theme-pages-img>
@@ -37,7 +37,13 @@ import XhThemePagesInitiation from '../components/index/XhThemePagesInitiation';
             XhThemePagesIcon,
             XhThemePagesSetMeal,
             XhThemePagesInitiation
+        },
+        data() {
+          return{
+            title:"少儿童书"
+          }
         }
+
     }
 </script>
 
@@ -45,5 +51,5 @@ import XhThemePagesInitiation from '../components/index/XhThemePagesInitiation';
     .XhThemePages-main{
         margin-top: .86rem;
         background: #f7f7f7;
-    }         
+    }
 </style>

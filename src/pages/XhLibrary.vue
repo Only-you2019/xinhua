@@ -58,13 +58,13 @@
 }
 .XhMyOrder-header img{
 	float: left;
-	width: .4rem;
-	height: .7rem;
-	margin-top: .3rem;
+	width: .2rem;
+	height: .4rem;
+	margin-top: .4rem;
 	margin-left: .2rem;
 }
 .XhMyOrder-header span{
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 1.31rem;
 	color: #717171;
 	text-align: center;

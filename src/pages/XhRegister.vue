@@ -14,12 +14,13 @@
             	<div></div>
 							<div></div>
 							<div></div>
-            	<input @input="phoneCheck()" v-model="userPhone" type="text" placeholder="请输入手机号">
+            	<input @blur="phoneCheck()" v-model="userPhone" type="text" placeholder="请输入手机号">
             	<input v-model="checkCoad"  type="text" placeholder="图片验证码">
-            	<h1 @click="PicCheck()" class="picCode" >{{picCode}}</h1>
-							<input  type="text" placeholder="短信验证码">
-							<button class="MessageCoad">发送验证码</button>
-							<input  v-model="userPass"  @input="passCheck()" type="password" placeholder="请设置密码">
+            	<img @click="checkCode()" :src="base64Str" class="picCode" >
+							<input v-model="noteCoad" type="text" placeholder="短信验证码">
+							<button  @click="MessageCoad()" class="MessageCoad">发送验证码</button>
+							<h1 v-if="flag" class="TimeCoad">{{Time}}后重新发送</h1>
+							<input  v-model="userPass"  @blur="passCheck()" type="password" placeholder="请设置密码">
 							 <p class="FooterBoxTreaty">
 							  <span >已同意<router-link to="/XhLoginTreaty" style="color: #0c77d3;" href="#">《用户注册协议》</router-link></span>
 							</p>
@@ -36,63 +37,108 @@
     name:"XhRegister",
     data(){
       return{
+				flag:"",
 				PhoneMsg:"",
 				userPhone:"",
 				phone:'',
 				checkCoad:'',
-				picCode:'DWQD',
 				userPass:'',
-				pass:""
+				pass:"",
+				base64Str:"",
+				noteCoad:'',
+				Time:""
       }
     },
+		created() {
+			this.checkCode()
+		},
 		methods:{
+			// 手机号验证
 			phoneCheck(){
-				var regPhone=/^1\d{10}$/;
+				var regPhone=/^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\d{8}$/;
 				if(regPhone.test(this.userPhone)==true){
 					this.PhoneMsg=''
 					this.phone=1;
+				}else{
+					this.$toast("手机号格式错误！")
 				}
 			},
-			PicCheck(){
-				var newcode='';
-				var Array=["A","B","C","D","E","F","G","H","I","J","K","O","P"];
-				
-				for(var i=0;i<4;i++){
-					var index=Math.floor(Math.random()*10);
-					newcode+=Array[index]
-				}
-				this.picCode=newcode
+			// 图片验证码
+			checkCode(){
+				this.$axios.get("/api/xinhua/verification/code").then((res)=>{
+						if(res.status==200){
+							if(res.data.status==0){
+								this.base64Str=res.data.datas.base64Str
+							}
+						}
+				}).catch((err)=>{
+						this.$toast("请求发送失败！")
+					})
 			},
+			// 验证码
+    	MessageCoad(){
+				if(this.phone==1){
+					this.$axios.post("/api/xinhua/registered/code",{
+						verificationCode:this.checkCoad,
+						mobile:this.userPhone
+					}).then((res)=>{
+						if(res.status==200){
+							console.log(res)
+							if(res.data.status==0){
+								this.$toast(res.data.err)
+								this.Time=60;
+								this.flag=true
+								let time= setInterval(()=>{
+									this.Time--;
+									if(this.Time==0){
+										clearInterval(time)
+										this.flag=false
+									}
+								},1000)
+							}else if(res.data.status==2){
+								this.$toast(res.data.err)
+								console.log(res)
+							}
+						}
+					}).catch((err)=>{
+						this.$toast("请求发送失败！")
+					})
+				}else{
+					this.$toast("请输入正确的手机格式")
+				}
+			},
+			// 密码验证
 			passCheck(){
 				var regPass=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/;
 				if(regPass.test(this.userPass)==true){
 					this.PhoneMsg='';
 					this.pass=1;
+				}else{
+					this.$toast("密码格式错误！")
 				}
 			},
+			// 总验证
 			LoginPhonePost(){
 				if(this.pass==1&&this.phone==1){
-					let info={
-					    username:this.userPhone,
-					    userpass:this.userPass
-					};
-					fetch("http://localhost:3000/yanxuan/api/login",{
-					    method: "post", //传参方式
-					    headers: {
-					        "Content-Type": "application/json" //请求头
-					    },
-					    body: JSON.stringify(info) //传的参数
-					}).then(res=>{
-					    res.json().then(data=>{
-					        if (data.state == 0) {
-					            this.$toast("注册失败，请重新注册");
-					        }else{
-					            this.$toast("注册成功");
-					            localStorage.setItem('username', info.username);//存储用户名
-					            this.$router.push("/XhLogin");
-					            //将用户名，密码保存至浏览器
-					        }
-					    })
+					this.$axios.post("/api/xinhua/registered",{
+						mobile:this.userPhone,
+						pass:this.userPass,
+						mobileCode:this.noteCoad
+					}).then((res)=>{
+						if(res.status==200){
+							console.log(res)
+							if(res.data.status==0){
+								this.$toast(res.data.err)
+								this.saveCookie("userPhone","userPass",{expires: 7})
+								this.$router.push("/XhLogin")
+							}else if(res.data.status==2){
+								this.$toast(res.data.err)
+								// this.saveCookie("mobile","pass",{expires: 7})
+							}
+						}
+						console.log(res)
+					}).catch((err)=>{
+						this.$toast("请求发送失败")
 					})
 				}else{
 					this.$toast('此次注册信息有误');
@@ -120,24 +166,33 @@
 		font-weight: 900;
 	}
 	.picCode{
-		 height: 1.1rem;
-		 line-height: 1.1rem;
-		 font-size: .5rem; 
-		 color: blue; 
+		 width: 2rem;
+		 height: .9rem;
 		 position: absolute;
-		 top: 1rem; 
-		 left: 5.3rem;
+		 top: 1.2rem; 
+		 right: .2rem;
 	}
 	.MessageCoad{
-		height: .9rem;
-		line-height: .9rem;
-		font-size: .1rem; 
+		height: .7rem;
 		width: 2rem;
-		color: blue; 
 		position: absolute;
-		top: 2.3rem; 
-		left: 4.9rem;
+		top: 2.4rem;
+		right: .1rem;
 		background: red;
+		color: #FFFFFF;
+		font-size: .2rem;
+		line-height: .7rem;
+	}
+	.TimeCoad{
+		height: .7rem;
+    width: 2.5rem;
+    position: absolute;
+    top: 2.4rem;
+    right: .1rem;
+    background: gainsboro;
+    color: #FFFFFF;
+    font-size: .2rem;
+    line-height: .7rem;
 	}
   .LoginLogon .LoginHeader{
     width: 100%;

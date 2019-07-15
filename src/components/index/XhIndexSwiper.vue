@@ -44,7 +44,9 @@
             observeParents:true,
             // 分页器
             pagination: {
-              el: ".swiper-pagination1"
+              el: ".swiper-pagination1",
+              // bulletClass: "my-bullet",
+              // bulletActiveClass: "my-bullet-active"
             },
           });
         }

@@ -23,6 +23,8 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 // 引入axios，并加到原型链中
 import axios from 'axios';
+// 允许携带cookie
+axios.defaults.withCredentials=true
 Vue.prototype.$axios = axios;
 //axios的依赖
 import QS from 'qs'

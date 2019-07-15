@@ -22,14 +22,13 @@
 						<!-- <p ref="account" @click="ChangeAccount()">账号</p>
 						<p ref="pass" @click="Changepass()">密码</p> -->
 						<!-- <input  v-model="userphone" @input="phoneCheck()" type="text" placeholder="账号"> -->
-						<input v-model="userId" @input="idCheck()"  type="text" placeholder="账号">
-						<input  v-model="userPass"  @input="passCheck()" type="password" placeholder="密码">
+						<input v-model="userId" @blur="idCheck()"  type="text" placeholder="账号">
+						<input  v-model="userPass"  @blur="passCheck()" type="password" placeholder="密码">
 						<p class="FooterBoxPost" >
 							<router-link tag="span" to="/XhRegisterProtocol">注册</router-link>
 							<router-link tag="span" to="/XhLoginForget">忘记密码</router-link>
 						</p>
 						<input @click="XhLoginPost()" type="button" class="FooterBoxSign" value="登录">
-						<p class="XhLoginMsg" >{{Msg}}</p>
 					</div>
 				</div>
 				
@@ -61,20 +60,18 @@
 					<div class="XhLoginPost">
 						<div></div>
 						<div></div>
-						<!-- <p ref="account1" @click="ChangeAccount1()">账号</p>
-						<p ref="pass1" @click="ChangePass1()">密码</p> -->
-						<input @input="phoneCheck()" v-model="userPhone" type="text" placeholder="请输入手机号">
-						<input v-model="checkCoad"  type="text" placeholder="图片验证码">
-						<img @click="PicCheck()" src="" class="picCode" >
-						<input   type="text" placeholder="短信验证码">
-						<button class="MessageCoad">发送验证码</button>
-						<p class="XhLoginPhoneMsg" >{{PhoneMsg}}</p>
-						<input @click="LoginPhonePost()" type="button" class="FooterBoxSign" value="登录">
-					</div>
-				</div>
-				<div class="FooterBoxTreaty">
-					<van-checkbox v-model="checked" checked-color="#e61818"></van-checkbox>
-					<span >已同意<router-link to="/XhLoginTreaty" style="color: #0c77d3;" href="#">《用户注册协议》</router-link></span>
+						<input @blur="phoneCheck()" v-model="userPhone" type="text" placeholder="请输入手机号">
+								<input v-model="checkCoad"  type="text" placeholder="图片验证码">
+								<img @click="PicCheck()" :src="base64Str" class="picCode" >
+								<input v-model="noteCoad" type="text" placeholder="短信验证码">
+								<button :disabled="disabled" @click="NoteCoad()" class="MessageCoad">发送验证码</button>
+								<h1 v-if="show" class="TimeCoad">{{Time}}后重新发送</h1>
+								<input @click="LoginPhonePost()" type="button" class="FooterBoxSign" value="登录">
+							</div>
+						</div>
+						<div class="FooterBoxTreaty">
+							<van-checkbox v-model="checked" checked-color="#e61818"></van-checkbox>
+							<span >已同意<router-link to="/XhLoginTreaty" style="color: #0c77d3;" href="#">《用户注册协议》</router-link></span>
 				</div>
 				<div class="FooterBoxThird">
 					<div class="one">
@@ -104,136 +101,164 @@
 				checked:false,
 				userId:'',
 				userPass:'',
-				Msg:'',
-				PhoneMsg:"",
 				id:"",
 				pass:"",
 				userPhone:"",
 				phone:"",
-				picCode:"FEVA",
-				checkCoad:"",
+				checkCoad:'',
+				disabled:false,
+				PicCheck1:"",
+				base64Str:'',
+				show:'',
+				Time:'',
+				noteCoad:''
 			}
 		},
-		// &&/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/.test()
-		computed:{
+		created() {
+			this.PicCheck()
 		},
 		methods:{
 			LoginFontSize(){
 				this.$refs.Login.style.fontSize=".48rem";
 				this.$refs.QuestLogin.style.fontSize=".38rem";
 			},
+			
 			QuestLoginFontSize(){
 				this.$refs.Login.style.fontSize=".38rem";
 				this.$refs.QuestLogin.style.fontSize=".48rem";
 			},
-			// 账号登录
+			
 			idCheck(){
-			    var regid=/^[a-zA-Z]{1}\d{8,}$/;
-			    if(regid.test(this.userId)==true){
-			        this.Msg='';
-			        this.id=1;
-			    }
-			},
-			// 密码验证
-			passCheck(){
-				var regPass=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/;
-				if(regPass.test(this.userPass)==true){
-					this.Msg='';
-					this.pass=1;
-				}
-			},
-			// 手机验证
-			phoneCheck(){
-				var regPhone=/^1\d{10}$/;
-				if(regPhone.test(this.userPhone)==true){
-					this.PhoneMsg=''
-					this.phone=1;
-				}
-			},
-			// 图片验证码
-			// PicCheck(){
-// 				var newcode='';
-// 				var Array=["A","B","C","D","E","F","G","H","I","J","K","O","P"];
-// 				
-// 				for(var i=0;i<4;i++){
-// 					var index=Math.floor(Math.random()*10);
-// 					newcode+=Array[index]
-// 				}
-// 				this.picCode=newcode
-// 			},
-			// 账号登录
-			XhLoginPost(){
-				if(this.id==1&&this.pass==1){
-				$axios.post("http://localhost:3000/api/data",{
-					username:this.userPhone,
-					userpass:this.userPass
-				}).then(function(res){
-					
-				}).catch(function(err){
-					
-				})
+				    var regid=/^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\d{8}$/;
+				    if(regid.test(this.userId)==true){
+				        this.id=1;
+				    }else{
+						this.$toast("账号格式错误！")
+					}
+				},
 				
-// 					let info={
-// 					    username:this.userPhone,
-// 					    userpass:this.userPass
-// 					};
-// 					fetch("http://localhost:3000/api/data",{
-// 					    method: "post", //传参方式
-// 					    headers: {
-// 					        "Content-Type": "application/json" //请求头
-// 					    },
-// 					    body: JSON.stringify(info) //传的参数
-// 					}).then(res=>{
-// 					    	res.json().then(data=>{
-// 					        if (data.state == 0) {
-// 					            this.$toast("亲，用户名或者密码错误");
-// 					        }else{
-// 					            this.$toast("登录成功");
-// 					            localStorage.setItem('username', info.username);//存储用户名
-// 					            this.$router.push("/");
-// 					            //将用户名，密码保存至浏览器
-// 					        }
-// 					    })
-// 					})
-
-
-
-				}else{
-					this.$toast('此账户信息有误');
-				}
-			},
-			//快捷登陆
-			LoginPhonePost(){
-				if(this.phone==1&&this.checked==true){
-					let info={
-					    username:this.userPhone,
-					    userpass:this.userPass
-					};
-					fetch("http://localhost:3000/api/data",{
-					    method: "post", //传参方式
-					    headers: {
-					        "Content-Type": "application/json" //请求头
-					    },
-					    body: JSON.stringify(info) //传的参数
-					}).then(res=>{
-					    res.json().then(data=>{
-					        if (data.state == 0) {
-					            this.$toast("亲，用户名或者密码错误");
-					        }else{
-					            this.$toast("登录成功");
-					            localStorage.setItem('username', info.username);//存储用户名
-					            this.$router.push("/");
-					            //将用户名，密码保存至浏览器
-					        }
-					    })
+				// 密码验证
+			passCheck(){
+					var regPass=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/;
+					if(regPass.test(this.userPass)==true){
+						this.pass=1;
+					}else{
+						this.$toast("密码格式错误！")
+					}
+				},
+				
+				// 手机验证
+			phoneCheck(){
+					var regPhone=/^^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\d{8}$$/;
+					if(regPhone.test(this.userPhone)==true){
+						this.phone=1;
+					}else{
+						this.$toast("手机号格式错误！")
+					}
+				},
+				
+				
+				// 图片验证码
+			PicCheck(){
+					this.$axios.get("/api/xinhua/verification/code").then((res)=>{
+							console.log(res)
+							if(res.status==200){
+								if(res.data.status==0){
+									this.base64Str=res.data.datas.base64Str
+								}else{
+									this.$toast(res.data.err)
+								}
+							}
+						})
+					},
+					
+					
+				// 短信验证
+			NoteCoad(){
+				if(this.phone==1){
+					this.$axios.post("",{
+						code:this.checkCoad,
+						mobile:this.userPhone
+					}).then((res)=>{
+						console.log(res)
+						if(res.status==200){
+							if(res.data.status==0){
+								this.$toast(res.data.err)
+								this.Time=60;
+								this.show=true
+								let time= setInterval(()=>{
+									this.Time--;
+									if(this.Time==0){
+										clearInterval(time)
+										this.show=false
+									}
+								},1000)
+							}else if(res.data.status==2){
+								this.$toast(res.data.err)
+							}
+						}
 					})
-				}else{
-					this.$toast('此次手机登录信息有误');
-				}
+					}else{
+						this.$toast("请输入正确的手机格式")
+					}
+				},
+				
+				
+				// 账号登录
+			XhLoginPost(){
+					// let $this= this;
+					console.log(this.userId)
+				if(this.id==1&&this.pass==1){
+					this.$axios.post("/api/xinhua/login/account",{
+						mobile:this.userId,
+						pass:this.userPass
+					}).then((res)=>{
+						if(res.status == 200){
+							if(res.data.status == 0){
+								console.log(this.userId)
+								this.$toast("登录成功！")
+								this.$router.push("/")
+							}else if(res.data.status == 2){
+								this.$toast(res.data.err)
+							}
+						}
+						console.log(res)
+						
+					}).catch((err)=>{
+						this.$toast("请求发送失败！")
+					})
+					}else{
+						this.$toast('此账户信息有误');
+					}
+				},
+				
+				
+				//快捷登陆
+			LoginPhonePost(){
+					if(this.phone==1&&this.checked==true){
+						this.$axios.post("/api/xinhua/login/mobile",{
+							mobile:this.userPhone,
+							code:this.noteCoad
+						}).then((res)=>{
+							if(res.status==200){
+								if(res.data.status==0){
+									this.$toast(res.data.err)
+									this.$router.push("/")
+								}else if(res.data.status==2){
+									this.$toast(res.data.err)
+								}
+							}
+						}).catch((err)=>{
+							this.$toast("网址请求失败")
+						})
+					}else{
+						this.$toast('此次手机登录信息有误');
+					}
 			}
+			
+			
 		}
-		
-    }
+		}
 </script>
 
 <style scoped>
@@ -259,6 +284,17 @@
 	.LoginTitle{
 		width: 100%;
 		height: .87rem;
+	}
+	.TimeCoad{
+		height: .7rem;
+	  width: 2.5rem;
+	  position: absolute;
+	  top: 2.4rem;
+	  right: .1rem;
+	  background: gainsboro;
+	  color: #FFFFFF;
+	  font-size: .2rem;
+	  line-height: .7rem;
 	}
 	.LoginTitle .LoginTitleBox{
 		width: 6.9rem;
@@ -306,11 +342,6 @@
 		position: relative;
 	}
 	.LoginFooter .LoginFooterBox .FooterBoxInput .XhLoginPost .XhLoginMsg{
-		font-size: .38rem;
-		color: red;
-		font-weight: 900;
-	}
-    .LoginFooter .LoginFooterBox .FooterBoxInput .XhLoginPost  .XhLoginPhoneMsg{
 		font-size: .38rem;
 		color: red;
 		font-weight: 900;
@@ -377,24 +408,22 @@
 		margin-top: .4rem;
 	}
 	.LoginFooter .LoginFooterBox .FooterBoxInput .XhLoginPost .picCode{
-		 height: 1.1rem;
-		 line-height: 1.1rem;
-		 font-size: .5rem; 
-		 color: blue; 
-		 position: absolute;
-		 top: 1rem; 
-		 left: 5.5rem;
+		width: 2rem;
+		height: .9rem;
+		position: absolute;
+		top: 1.2rem; 
+		right: .2rem;
 	}
 	.LoginFooter .LoginFooterBox .FooterBoxInput .XhLoginPost .MessageCoad{
-		height: .9rem;
-		line-height: .9rem;
-		font-size: .1rem; 
+		height: .7rem;
 		width: 2rem;
-		color: blue; 
 		position: absolute;
-		top: 2.2rem; 
-		left: 4.9rem;
+		top: 2.4rem;
+		right: .1rem;
 		background: red;
+		color: #FFFFFF;
+		font-size: .2rem;
+		line-height: .7rem;
 	}
 	.LoginFooter .LoginFooterBox .FooterBoxTreaty{
 		width: 100%;

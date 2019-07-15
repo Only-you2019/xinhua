@@ -1,47 +1,24 @@
 <template>
     <div class="XhShoppingCartProduct">
       <div class="XhShoppingCartShopName">
-        <van-checkbox v-model="checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked"></van-checkbox>
+        <van-checkbox v-model="product.checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked" @click="allChecked"></van-checkbox>
         <van-icon name="shop-o" class="XhShoppingCartShopIcon"/>
         <h4 class="XhShoppingCartShopTitle">新华书店网上商城自营图书</h4>
         <van-button type="primary" @click="showPopup" class="XhShoppingCartDiscountsBox">
           <van-icon name="coupon-o" class="XhShoppingCartShopCoupon"/>
         </van-button>
       </div>
-      <div class="XhShoppingCartProductInfo">
-        <van-checkbox v-model="checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked"></van-checkbox>
+      <div class="XhShoppingCartProductInfo" v-for="(item,index) in product.data">
+        <van-checkbox v-model="item.checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked"></van-checkbox>
         <div class="Product">
-          <img src="https://img2.xinhuashudian.com/bookbasepic/C/02448/3858400-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" alt="" class="ProductImg">
-          <h5 class="ProductH5">习近平讲故事</h5>
-          <p class="ProductPrice">￥45.60</p>
-          <van-stepper class="AddReduce" :value="value" async-change @change="onChange"/>
-        </div>
-      </div>
-      <div class="XhShoppingCartProductInfo">
-        <van-checkbox v-model="checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked"></van-checkbox>
-        <div class="Product">
-          <img src="https://img2.xinhuashudian.com/bookbasepic/C/02448/3858400-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" alt="" class="ProductImg">
-          <h5 class="ProductH5">习近平讲故事</h5>
-          <p class="ProductPrice">￥45.60</p>
-          <van-stepper class="AddReduce" :value="value" async-change @change="onChange"/>
-        </div>
-      </div>
-      <div class="XhShoppingCartProductInfo">
-        <van-checkbox v-model="checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked"></van-checkbox>
-        <div class="Product">
-          <img src="https://img2.xinhuashudian.com/bookbasepic/C/02448/3858400-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" alt="" class="ProductImg">
-          <h5 class="ProductH5">习近平讲故事</h5>
-          <p class="ProductPrice">￥45.60</p>
-          <van-stepper class="AddReduce" :value="value" async-change @change="onChange"/>
-        </div>
-      </div>
-      <div class="XhShoppingCartProductInfo">
-        <van-checkbox v-model="checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked"></van-checkbox>
-        <div class="Product">
-          <img src="https://img2.xinhuashudian.com/bookbasepic/C/02448/3858400-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" alt="" class="ProductImg">
-          <h5 class="ProductH5">习近平讲故事</h5>
-          <p class="ProductPrice">￥45.60</p>
-          <van-stepper class="AddReduce" :value="value" async-change @change="onChange"/>
+          <img :src="item.img" alt="" class="ProductImg">
+          <h5 class="ProductH5">{{item.name}}</h5>
+          <p class="ProductPrice">{{item.price}}</p>
+          <div class="AddReduce">
+            <span class="numberReduce" @click="reduce(index)">-</span>
+            <span class="ProductNumber">{{item.value}}</span>
+            <span class="numberAdd" @click="add(index)">+</span>
+          </div>
         </div>
       </div>
       <van-popup v-model="show" round position="bottom" :style="{ height: '20%', height: '10rem' }">
@@ -99,25 +76,26 @@
 
     export default {
         name: "XhShoppingCartProduct",
+        props:["product"],
         data() {
           return {
-            checked: true,
-            value: 1,
-            show: false
+            show: false,
           }
         },
         methods: {
-          onChange(value) {
-            this.$toast.loading({ forbidClick: true });
-
-            setTimeout(() => {
-              this.$toast.clear();
-              this.value = value;
-            }, 500);
-          },
           showPopup() {
             this.show = true;
+          },
+          reduce(index){
+            this.$emit("reducef",index);
+          },
+          add(index){
+            this.$emit("addf",index);
+          },
+          allChecked(){
+            this.$emit("allChecked",index);
           }
+
         }
     }
 </script>
@@ -187,9 +165,27 @@
     color:#c52726;
   }
   .AddReduce{
-    margin-top: 1.60rem;
+    margin-top: 1.2rem;
     margin-right: 0.04rem;
     float: right;
+    width: 2.0rem;
+    height: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .numberAdd,.numberReduce{
+    width: 0.6rem;
+    height: 0.6rem;
+    font-size: 0.6rem;
+    line-height: 1rem;
+    text-align: center;
+  }
+  .ProductNumber{
+    width: 0.6rem;
+    height: 0.6rem;
+    font-size: 0.4rem;
+    line-height: 1rem;
+    text-align: center;
   }
   .PopupDiscountsHeader{
     width: 100%;

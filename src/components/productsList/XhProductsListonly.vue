@@ -4,15 +4,13 @@
       <div class="onlyProductsList">
         <!--        <p>仅看有货</p>-->
         <div class="InstockssonlyProductsList">
-          <van-dropdown-menu active-color="#c62f2e" class="InstockonlyProductsList">
-            <van-dropdown-item v-model="value" :options="options" />
-          </van-dropdown-menu>
+           <p>仅看有货</p>
         </div>
         <!--        <p>语种  v</p>-->
         <div class="InstocksonlyProductsList">
           <van-dropdown-menu active-color="#c62f2e" class="InstockonlyProductsList">
-            <van-dropdown-item title="语种" ref="item" >
-              <van-switch-cell v-model="switch1" title="中文" />
+            <van-dropdown-item :title="ListTwo[0].group" ref="item" >
+              <van-switch-cell v-model="switch1"  v-for="i in ListTwo[0].nameAndCounts" :title="i.name" />
               <div class="onlyProductsListchian"  >
                 <van-button block type="info" @click="onConfirm"  class="ResetsonlyProductsList" >重置</van-button>
                 <van-button block type="info" @click="onConfirm" class="ResetonlyProductsList">确认</van-button>
@@ -29,8 +27,8 @@
         <!--        <p>语言  v</p>-->
         <div class="InstocksonlyProductsList">
           <van-dropdown-menu active-color="#c62f2e" class="InstockonlyProductsList">
-            <van-dropdown-item title="语言" ref="item" >
-              <van-switch-cell v-model="switch2" title="汉语" />
+            <van-dropdown-item :title="ListTwo[2].group" ref="item" >
+              <van-switch-cell v-model="switch2" v-for="i in ListTwo[2].nameAndCounts" :title="i.name" />
               <div  class="onlyProductsListchian">
                 <van-button block type="info" @click="onConfirm"  class="ResetsonlyProductsList" >重置</van-button>
                 <van-button block type="info" @click="onConfirm" class="ResetonlyProductsList">确认</van-button>
@@ -45,6 +43,7 @@
 <script>
     export default {
         name: "XhProductsListonly",
+      props:["ListTwo"],
       data() {
         return {
           value1: 0,
@@ -69,23 +68,23 @@
           value: 0,
           switch1: false,
           switch2: false,
-          option: [
-            { text: '出版..', value: 0 },
-            { text: '2018-01-01', value: 1 },
-            { text: '2017-01-01', value: 2 },
-            { text: '2016-04-01', value: 3 },
-            { text: '2019-01-01', value: 4 },
-            { text: '2017-05-01', value: 5 },
-            { text: '2019-03-01', value: 6 },
-            { text: '2018-07-01', value: 7 },
-            { text: '2015-01-01', value: 8 },
-            { text: '2016-06-01', value: 9 },
-            { text: '2013-01-01', value: 10 },
-          ],
-          options: [
-            { text: '仅看有货', value: 0 },
-          ]
+          option: [],
+          // options: [
+          //   { text: '仅看有货', value: 0 },
+          // ]
         }
+      },
+      created(){
+          var per ={}
+          per.text=this.ListTwo[1].group
+          per.value=0
+        this.option.push(per)
+        this.ListTwo[1].nameAndCounts.forEach((i,index)=>{
+          var per1 ={}
+          per1.text=i.name
+          per1.value=index+1
+          this.option.push(per1)
+        })
       },
       methods: {
         showPopup() {

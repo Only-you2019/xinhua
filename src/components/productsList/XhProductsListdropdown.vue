@@ -19,57 +19,39 @@
         <van-popup v-model="show"    position="right" class="popupXhProductsList">
           <ul class="screenXhProductsList">
             <li>
-              <h2>价格区间</h2>
+              <h3>价格区间</h3>
               <div class="popup_boxXhProductsList">
                 <input type="text" placeholder="最低价" > &nbsp; —— &nbsp; <input type="text" placeholder="最高价" >
               </div>
             </li>
             <li>
-              <h2>品牌</h2>
+              <h3>品牌</h3>
             </li>
             <li>
-              <h2>类别</h2>
+              <h3>类别</h3>
             </li>
-            <li>
-              <h2>语种</h2>
-              <p>中文</p>
-            </li>
-            <li >
-              <h2>出版时间</h2>
-              <div class="timeXhProductsList">
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
-              </div>
-              <div class="timeXhProductsList">
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
-              </div>
-              <div class="timeXhProductsList">
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
-              </div>
-              <div class="timeXhProductsList">
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
-                <p>2013-01-01</p>
+            <li v-for="item in ListTwo">
+              <h3>{{item.group}}</h3>
+              <div>
+                <p v-for="i in item.nameAndCounts">{{i.name}}</p>
               </div>
             </li>
-            <li>
-              <h2>语言</h2>
-              <p>汉语</p>
-            </li>
-            <li >
-              <h2>作者</h2>
-              <div class="timeXhProductsList">
-                <p>蔡东潘</p>
-                <p>（明）吴承恩</p>
-                <p>（明）罗贯中</p>
-              </div>
-
-            </li>
+<!--            <li >-->
+<!--              <h3>{{ListTwo[1].group}}</h3>-->
+<!--              <div class="timeXhProductsList">-->
+<!--                <p v-for="i in ListTwo[1].nameAndCounts">{{i.name}}</p>-->
+<!--              </div>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--              <h3>{{ListTwo[2].group}}</h3>-->
+<!--              <p v-for="i in ListTwo[2].nameAndCounts">{{i.name}}</p>-->
+<!--            </li>-->
+<!--            <li >-->
+<!--              <h3>{{ListTwo[3].group}}</h3>-->
+<!--              <div class="timeXhProductsList">-->
+<!--                <p v-for="i in ListTwo[3].nameAndCounts">{{i.name}}</p>-->
+<!--              </div>-->
+<!--            </li>-->
           </ul>
         </van-popup>
       </div>
@@ -79,6 +61,7 @@
 <script>
     export default {
         name: "XhProductsListdropdown",
+      props:["ListTwo"],
       data() {
         return {
           value1: 0,

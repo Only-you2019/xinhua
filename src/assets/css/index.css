@@ -65,18 +65,18 @@
   width: 100%;
   height:auto;
 }
-.index-content .swiper-pagination1{
+.index-content #swiper-pagination1{
   width: 4rem;
   background: #00000014;
   border-radius:.15rem ;
   /*margin:0 auto;*/
   left:25%;
 }
-.index-content .index-banner .swiper-container-horizontal >.swiper-pagination-bullets .swiper-pagination-bullet{
-  width: 0.4rem ;
-  height: 0.05rem ;
-  background-color: red ;
-}
+/*#swiper-pagination1 .my-bullet{*/
+/*  width: 1rem !important;*/
+/*  height: 1em !important;*/
+/*  background-color: black!important;*/
+/*}*/
 /*导航*/
 .index-content .index-nav{
   background-color: #fff;
@@ -145,6 +145,7 @@
 .index-content .index-list-box{
   overflow-x:auto;
   text-align: left;
+  margin-top:0.2rem;
 }
 .index-content .index-list-each{
   width: 2rem;

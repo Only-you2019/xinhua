@@ -66,7 +66,7 @@
       <section class="kefu">
         <ul>
           <li>
-            <router-link to="">
+            <router-link to="/XhCustomerservice">
               <div class="kefu_img">
                 <img src="../../static/images/mine/message5.png" alt="">
                 <div>

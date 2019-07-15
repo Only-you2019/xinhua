@@ -1,7 +1,7 @@
 <template>
-    <div class="XhMorePage">
+    <div class="XhMorePage pageBody">
         <!-- Header -->
-        <Xh-nav-pages-header></Xh-nav-pages-header> 
+        <Xh-nav-pages-header :title="title"></Xh-nav-pages-header>
         <div class="XhMorePage-main">
              <!--轮播图-->
             <xh-index-swiper :indexSwiper="indexSwipers"></xh-index-swiper>
@@ -38,6 +38,7 @@
         },
         data () {
             return {
+                title:"党政频道",
                 Newbooks:[{ tlt:"新书上架",
                     moreLink:"",
                     indexListBrach:[{
@@ -328,7 +329,7 @@
                     {src:"https://img1.xinhuashudian.com/images/2019/06/27/78200476-2e36-48b0-a0d4-9828ca019a57.jpg?x-oss-process=image/resize,m_lfit,limit_0,h_300"},
                     {src:"https://img1.xinhuashudian.com/images/2019/06/27/68dd2db7-2fe7-4866-b51b-6c67ccbfe5f8.jpg?x-oss-process=image/resize,m_lfit,limit_0,h_300"}
                 ],
-            
+
         }
     }
 }
@@ -337,6 +338,9 @@
 <style scoped>
 
     .XhMorePage-main {
-        margin-top: 1rem;
+        margin-top: .86rem;
+        flex: 1;
+        overflow-y: auto;
+
     }
 </style>
