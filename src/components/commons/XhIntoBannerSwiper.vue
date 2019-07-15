@@ -7,7 +7,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(v,vId) in item.swiperSlide" :key="vId">
           <div class="itemList" v-for="(l,lId) in v.itemList" :key="lId">
-            <router-link :to="path+'/'+l.id">
+            <router-link :to="path+'/'+l.goodsId">
               <div class="item-wrap">
                 <img class="book-pic" :src="l.img" alt="bookPic"/>
                 <span class="smallItem-name">{{l.name}}</span>
@@ -30,7 +30,8 @@ export default {
   props: ["item"],
   data(){
     return {
-      path:"/XhProductDetail"
+      path:"/XhProductDetail",
+     
     }
   },
   mounted() {
