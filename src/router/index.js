@@ -110,7 +110,7 @@ export default new Router({
       component: XhBannerPages
     },
     {
-      path: '/XhProductDetail',
+      path: '/XhProductDetail/:goodsId',
       name: 'XhProductDetail',
       component: XhProductDetail
     },
