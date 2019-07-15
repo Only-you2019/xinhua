@@ -32,16 +32,27 @@ export default {
   components: {
     "xh-into-banner-swiper": XhIntoBannerSwiper
   },
+  data() {
+    return {
+      pic: "",
+      popularInfo: [],
+      page: {},
+      designData: {},
+      serviceData: {}
+    };
+  },
   methods: {
     // 从this.serviceData里面查找groupId是body_3，并且id是1010000103205007的item
     findItemById(groudId, id) {
       // item的格式是：{img:'', name: '', price: ''}
-      var item = { img: "", name: "", price: "" };
+      var item = { id:"",img: "", name: "", price: "" };
       for (let dataItem of this.serviceData[groudId]._DATA_) {
         if (dataItem.itemId == id) {
-          var rawUrl =  (dataItem.mainImage.indexOf("https:") == 0)
-                      ? dataItem.mainImage
-                      : "https:" + dataItem.mainImage;
+          var rawUrl =
+            dataItem.mainImage.indexOf("https:") == 0
+              ? dataItem.mainImage
+              : "https:" + dataItem.mainImage;
+          item.id =  dataItem.itemId;
           item.img = "http://api.hll666.xyz/api/xinhua/img?imgUrl=" + rawUrl;
           item.name = dataItem.itemName;
           item.price = "￥" + (dataItem.lowPrice / 100).toFixed(2);
@@ -53,14 +64,14 @@ export default {
   },
   created() {
     let me = this;
-    api
-      .get("/api/xinhua/carousel/info", { name: "zhuanti-xuexiqiangguoban" })
+    api.get("/api/xinhua/carousel/info", { name: "zhuanti-xuexiqiangguoban" })
       .then(responseData => {
         // 判断http请求状态码,200为请求成功
         if (responseData.status === 200 && responseData.data.status === 0) {
           // responseData.datas
 
           me.page = responseData.data.datas.page;
+          console.log(responseData.data.datas)
 
           me.designData = JSON.parse(responseData.data.datas.designData.body);
 
@@ -102,16 +113,8 @@ export default {
       .catch(err => {
         // 请求错误返回错误信息
         console.log(err);
-      });
-  },
-  data() {
-    return {
-      pic: "",
-      popularInfo: [],
-      page: {},
-      designData: {},
-      serviceData: {}
-    };
+      })
+      console.log(this.popularInfo);
   }
 };
 </script>
