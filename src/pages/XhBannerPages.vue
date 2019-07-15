@@ -45,14 +45,14 @@ export default {
     // 从this.serviceData里面查找groupId是body_3，并且id是1010000103205007的item
     findItemById(groudId, id) {
       // item的格式是：{img:'', name: '', price: ''}
-      var item = { id:"",img: "", name: "", price: "" };
+      var item = { goodsId:"",img: "", name: "", price: "" };
       for (let dataItem of this.serviceData[groudId]._DATA_) {
         if (dataItem.itemId == id) {
           var rawUrl =
             dataItem.mainImage.indexOf("https:") == 0
               ? dataItem.mainImage
               : "https:" + dataItem.mainImage;
-          item.id =  dataItem.itemId;
+          item.goodsId =  dataItem.itemId;
           item.img = "http://api.hll666.xyz/api/xinhua/img?imgUrl=" + rawUrl;
           item.name = dataItem.itemName;
           item.price = "￥" + (dataItem.lowPrice / 100).toFixed(2);
