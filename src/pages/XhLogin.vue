@@ -507,14 +507,14 @@
   	justify-content: space-around;
   }
   .LoginFooter .LoginFooterBox .FooterBoxThird .one{
-  	width: 1.2rem;
   	display: flex;
-  	justify-content: space-between;
+  	justify-content: left;
   	align-items: center;
   }
   .LoginFooter .LoginFooterBox .FooterBoxThird .one img{
   	width: .5rem;
   	height:.5rem;
+    vertical-align: middle;
   }
   .LoginFooter .LoginFooterBox .FooterBoxThird .one span{
   	font-size: .33rem;color: #9e9e9e;
