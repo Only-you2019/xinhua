@@ -3,9 +3,9 @@
     <div>
       <div class="footerProductDetail">
         <div class="shoppProductDetail">
-          <router-link to="/">
+          <router-link to="/XhCustomerservice">
             <van-icon name="service-o" class="footerDetailfooterProductDetail" />
-            <span>联系客服</span>
+            <span >联系客服</span>
           </router-link>
         </div>
         <div>
