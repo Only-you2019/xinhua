@@ -36,8 +36,10 @@
     created(){
       this.SearchBefore();
     },
-    updated(){
-      this.SearchPending()
+    watch:{
+      title(){
+        this.SearchPending()
+      }
     },
     methods:{
       Clear(){
@@ -68,8 +70,6 @@
           console.log(err)
         })
       },
-
-
       SearchPending(){
         // var a=this;
         if(this.title){
@@ -98,11 +98,16 @@
 </script>
 
 <style scoped>
+  /*@import "../assets/css/XhStyleOne.css";*/
+
   .XhSearch{
     width: 100%;
     height: 100%;
     background: #f7f7f7;
     display: flex;
     flex-direction: column;
+  }
+  .XhSearch .XhSearchFooter{
+    padding:0 0.2rem;
   }
 </style>

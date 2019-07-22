@@ -1,39 +1,41 @@
 <template>
     <div class="XhFirmOrderAddress">
-      <div class="XhFirmOrderAddress-wrapper">
-        <div class="XhFirmOrderAddress-Location-wrapper">
-          <div class="XhFirmOrderAddress-Location">
-            <div class="XhFirmOrderAddress-Location-userName-box">
-              <div class="XhFirmOrderAddress-Location-userName-wrapper">
-                <i class="iconfont XhFirmOrderAddress-Location-userName-icon">&#xe63f;</i>
-                <span class="XhFirmOrderAddress-Location-userName">wsz 157****0955</span>
+      <router-link to="/XhAddressManagement">
+        <div class="XhFirmOrderAddress-wrapper">
+          <div class="XhFirmOrderAddress-Location-wrapper">
+            <div class="XhFirmOrderAddress-Location">
+              <div class="XhFirmOrderAddress-Location-userName-box">
+                <div class="XhFirmOrderAddress-Location-userName-wrapper">
+                  <i class="iconfont XhFirmOrderAddress-Location-userName-icon">&#xe63f;</i>
+                  <span class="XhFirmOrderAddress-Location-userName">wsz 157****0955</span>
+                </div>
+              </div>
+              <div class="XhFirmOrderAddress-selection-box">
+                <p class="XhFirmOrderAddress-selection">
+                  北京北京市朝阳区建外街道某某小区
+                </p>
               </div>
             </div>
-            <div class="XhFirmOrderAddress-selection-box">
-              <p class="XhFirmOrderAddress-selection">
-                北京北京市朝阳区建外街道某某小区
-              </p>
+            <div class="XhFirmOrderAddress-Location-icons-warpper">
+              <i class="iconfont XhFirmOrderAddress-Location-icons">&#xe62d;</i>
             </div>
           </div>
-          <div class="XhFirmOrderAddress-Location-icons-warpper">
-            <i class="iconfont XhFirmOrderAddress-Location-icons">&#xe62d;</i>
+          <div class="XhFirmOrderAddress-imgs-box">
+            <div class="XhFirmOrderAddress-imgs-wrapper">
+              <img class="XhFirmOrderAddress-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)">
+            </div>
+            <div class="XhFirmOrderAddress-imgs-wrapper">
+              <img class="XhFirmOrderAddress-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)">
+            </div>
+            <div class="XhFirmOrderAddress-imgs-wrapper">
+              <img class="XhFirmOrderAddress-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)">
+            </div>
+            <div class="XhFirmOrderAddress-imgs-wrapper">
+              <img class="XhFirmOrderAddress-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)">
+            </div>
           </div>
         </div>
-        <div class="XhFirmOrderAddress-imgs-box">
-          <div class="XhFirmOrderAddress-imgs-wrapper">
-            <img class="XhFirmOrderAddress-img" src="http://assets-m.xinhuashudian.com/assets/files/address-border.5f118a025297e6d9.png">
-          </div>
-          <div class="XhFirmOrderAddress-imgs-wrapper">
-            <img class="XhFirmOrderAddress-img" src="http://assets-m.xinhuashudian.com/assets/files/address-border.5f118a025297e6d9.png">
-          </div>
-          <div class="XhFirmOrderAddress-imgs-wrapper">
-            <img class="XhFirmOrderAddress-img" src="http://assets-m.xinhuashudian.com/assets/files/address-border.5f118a025297e6d9.png">
-          </div>
-          <div class="XhFirmOrderAddress-imgs-wrapper">
-            <img class="XhFirmOrderAddress-img" src="http://assets-m.xinhuashudian.com/assets/files/address-border.5f118a025297e6d9.png">
-          </div>
-        </div>
-      </div>
+      </router-link>
     </div>
 </template>
 
@@ -41,6 +43,21 @@ XhFirmOrderCommodity
 <script>
     export default {
         name: "XhFirmOrderAddress",
+        data(){
+          return{
+            url:"//assets-m.xinhuashudian.com/assets/files/address-border.5f118a025297e6d9.png"
+          }
+        },
+        methods:{
+          urlEncode(str){
+            if(str.indexOf("https:")==-1){
+              str="https:"+str;
+              return encodeURI(str)
+            }else{
+              return encodeURI(str)
+            }
+          },
+        }
     }
 </script>
 

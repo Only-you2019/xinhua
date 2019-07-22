@@ -27,12 +27,13 @@
   margin-top: 1rem;
   height: 1.5rem;
   background-color: #fff;
+
 }
 .imgXhMyEvaluation{
-  width: 3rem;
+  width: 100%;
   height: 3rem;
   margin: auto;
-color: #999;
+  color: #999;
 }
 .imgXhMyEvaluation img{
   margin-top: 2rem;
@@ -40,7 +41,61 @@ color: #999;
 .imgXhMyEvaluation p{
    margin-top: .2rem;
  }
-img{
-  width: 100%;
+.evalutionimg{
+  display: flex;
+  justify-content: space-around;
+  padding-top: .4rem;
+  position: absolute;
+  left: 0;
+  width: 7.48rem;
+  height: 2rem;
+  background-color: #fff;
+}
+.evalutionimg img{
+  margin-top: 0;
+  width: 1rem;
+  height: 1rem;
+}
+.numbermyevalution {
+  width: 4rem;
+  text-align: left;
+}
+.numbermyevalution p{
+  font-size: .32rem;
+  color: rgb(54, 52, 51);
+}
+.imgXhMyEvaluation span{
+  padding-top: .3rem;
+  font-size: .3rem;
+}
+.pinglunevelution{
   height: 100%;
+  padding-left: .5rem;
+  text-align: left;
+  font-size: .3rem;
+  color: #999;
+  background-color: #fff;
+}
+.pinglunevelution img{
+  height: 3rem;
+  width: 3rem;
+}
+.pinglunevelution p{
+  margin-bottom: .3rem;
+}
+.noevelution{
+  margin-top: .3rem;
+  color: #cccccc;
+}
+.evalution-cont{
+  position: relative;
+  left:0;
+  width: 100%;
+  height: 2rem;
+}
+.evalution-cont .context{
+  position: absolute;
+  bottom:0.1rem;
+  left:0.3rem;
+  font-size:0.26rem;
 }

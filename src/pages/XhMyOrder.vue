@@ -12,11 +12,11 @@
 			  <div class="XhMyOrder-Bigbox">
 			  	<img src="../../static/images/mine/xhimg/xz.png">
 			  	<h6>暂无相关订单</h6>
-			  	<a href=""><span>随便逛逛</span></a>
+			  	<router-link to="/"><span>随便逛逛</span></router-link>
 			  </div>
 		  </van-tab>
 		  <van-tab title="待付款">
-			 <div class="XhMyorder-box">
+			 <div class="XhMyorder-box" >
 			 				  <div class="XhMyorder-box-one">
 			 					  <div class="XhMyorder-box-one-one">
 			 						  <i class="iconfont">&#xe620;</i>
@@ -36,17 +36,15 @@
 									  <span class="XhMyorder-box-one-three-span">实付款:<i>￥68.40</i></span>
 								  </div>
 								  <div class="XhMyorder-box-one-sie">
-									  <div class="XhMyorder-box-one-sie-one"><span>支付</span></div>
-									  <div class="XhMyorder-box-one-sie-two"><span>取消订单</span></div>
+								<router-link to="/XhCashierDesk"> <div class="XhMyorder-box-one-sie-one"><span>支付</span></div></router-link>
+									  <div class="XhMyorder-box-one-sie-two" ><span>取消订单</span></div>
 								  </div>
-			 				  </div>
-							  
+			 				  </div>  
 			 </div>
-			 
-			  <div class="XhMyOrder-Bigbox">
+			  <div class="XhMyOrder-Bigbox" v-if="0">
 			  	<img src="../../static/images/mine/xhimg/xz.png">
 			  	<h6>暂无相关订单</h6>
-			  	<a href=""><span>随便逛逛</span></a>
+			  	<router-link to="/"><span>随便逛逛</span></router-link>
 			  </div>
 		  </van-tab>
 		  <van-tab title="待发货">
@@ -54,7 +52,7 @@
 			  <div class="XhMyOrder-Bigbox">
 			  	<img src="../../static/images/mine/xhimg/xz.png">
 			  	<h6>暂无相关订单</h6>
-			  	<a href=""><span>随便逛逛</span></a>
+			  	<router-link to="/"><span>随便逛逛</span></router-link>
 			  </div>
 		  </van-tab>
 		  <van-tab title="待收货">
@@ -62,14 +60,14 @@
 			  <div class="XhMyOrder-Bigbox">
 			  	<img src="../../static/images/mine/xhimg/xz.png">
 			  	<h6>暂无相关订单</h6>
-			  	<a href=""><span>随便逛逛</span></a>
+			  	<router-link to="/"><span>随便逛逛</span></router-link>
 			  </div>
 		  </van-tab>
 		  <van-tab title="已完成">
 			  <div class="XhMyOrder-Bigbox">
 			  	<img src="../../static/images/mine/xhimg/xz.png">
 			  	<h6>暂无相关订单</h6>
-			  	<a href=""><span>随便逛逛</span></a>
+			  	<router-link to="/"><span>随便逛逛</span></router-link>
 			  </div>
 		  </van-tab>
 		</van-tabs>
@@ -95,7 +93,7 @@
             this.active=parseInt(to.params.id)
           }
         }
-      }
+      },
     }
 </script>
 
@@ -145,16 +143,16 @@
 .XhMyOrder-Bigbox a{
 	display: block;
 	width: 3rem;
-	height: 1rem;
+	height: .8rem;
 	background: #c62f2e;
 	margin-left: 2.4rem;
 	margin-top: .3rem;
 }
 .XhMyOrder-Bigbox span{
 	display: block;
-	font-size: 20px;
+	font-size: 18px;
 	color: white;
-	line-height: 1rem;
+	line-height: .8rem;
 }
 .XhMyorder-box{
 	width: 100%;

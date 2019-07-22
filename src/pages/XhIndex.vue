@@ -1,46 +1,76 @@
 <template>
     <div class="index-content pageBody">
       <!--头部-->
-      <xh-header :defaultKey="defaultKey"></xh-header>
+      <xh-header-one v-if='theme' :defaultKey="defaultKey"></xh-header-one>
+      <xh-header-two v-if='!theme' :defaultKey="defaultKey"></xh-header-two>
       <!--中间内容-->
-      <main class="index-main">
+      <main class="index-main" >
         <!--下拉刷新-->
-        <van-pull-refresh @refresh="onRefresh" v-model="isLoading">
-          <!--轮播图-->
-          <xh-index-swiper :indexSwiper="indexSwipers"></xh-index-swiper>
-          <!--导航-->
-          <div class="index-nav">
-            <ul class="flex">
-              <li :key="index" v-for="(item,index) in indexNav">
-              <xh-index-nav :item="item"></xh-index-nav>
-            </li>
-            </ul>
-          </div>
-          <!--主题-->
-          <xh-index-theme :themeData="indexTheme"></xh-index-theme>
-          <!--主要列表-->
-          <xh-index-list :listData="indexListTheme"></xh-index-list>
-          <!--新华优选-->
+        <div v-if="indexData.length">
+          <van-pull-refresh @refresh="onRefresh" v-model="isLoading">
+            <!--轮播图-->
+            <xh-index-swiper :indexSwiper="indexSwipers"></xh-index-swiper>
+            <!--导航-->
+            <div class="index-nav">
+              <ul class="flex">
+                <li :key="index" v-for="(item,index) in indexNav">
+                <xh-index-nav :item="item"></xh-index-nav>
+              </li>
+              </ul>
+            </div>
+            <!--消息通知-->
+            <div v-if="!theme">
+              <van-notice-bar
+                text="每日签到领红包！ 新用户注册即送5元   5万图书5折封顶|限时直降|满68减20"
+                left-icon="volume-o"
+              />
+            </div>
+            <!--主题-->
+            <xh-index-theme v-if="theme" :themeData="indexTheme"></xh-index-theme>
+            <!--主要列表-->
+            <xh-index-list v-if="theme" :listData="indexListTheme"></xh-index-list>
+            <!--新华优选-->
+            <!--banner图-->
+            <div v-if="theme" class="xh-banner">
+              <a href="">
+                <img :src="indexBanner" alt="">
+              </a>
+            </div>
+            <!--新华优选内容-->
+            <div v-if="theme" class="xh-select">
+              <xh-index-list :listData="indexSelect_cs"></xh-index-list>
+            </div>
+            <!--作者轮播图-->
+            <div v-if="theme" class="author-banner">
+              <xh-index-swiper :indexSwiper="indexAuthor_cs"></xh-index-swiper>
+            </div>
+            <!--图书分类-->
+            <div v-if="theme" class="book-classify">
+              <xh-index-list :listData="indexBookList_cs"></xh-index-list>
+            </div>
+          </van-pull-refresh>
           <!--banner图-->
-          <div class="xh-banner">
+          <div v-if="!theme" class="xh-banner">
             <a href="">
               <img :src="indexBanner" alt="">
             </a>
           </div>
-          <!--新华优选内容-->
-          <div class="xh-select">
-            <xh-index-list :listData="indexSelect_cs"></xh-index-list>
-          </div>
+          <!--主要列表-->
+          <xh-index-list v-if="!theme" :listData="indexListTheme"></xh-index-list>
           <!--作者轮播图-->
-          <div class="author-banner">
+          <div v-if="!theme" class="author-banner">
             <xh-index-swiper :indexSwiper="indexAuthor_cs"></xh-index-swiper>
           </div>
-          <!--图书分类-->
-          <div class="book-classify">
-            <xh-index-list :listData="indexBookList_cs"></xh-index-list>
+          <!--新华分类-->
+          <xh-index-class v-if="!theme" :indexBookList_cs="indexBookList_class"></xh-index-class>
+          <!--新华优选内容-->
+          <div v-if="!theme" class="xh-select">
+            <xh-index-list :listData="indexSelect_cs"></xh-index-list>
           </div>
-        </van-pull-refresh>
+        </div>
+        <van-loading v-if="!indexData.length" size="54px" color="#C62F2E" style="position: fixed;top:50%;left:50%;margin-left: -0.88rem">加载中...</van-loading>
       </main>
+
 
       <!--底部-->
       <xh-footer></xh-footer>
@@ -49,26 +79,31 @@
 
 <script>
   import api from '../XinHuaApi'
-  import XhHeader from '../components/commons/XhHeader'
+  import $ from "jquery"
+  import XhHeaderOne from '../components/commons/XhHeaderOne'
+  import XhHeaderTwo from '../components/commons/XhHeaderTwo'
   import XhFooter from '../components/commons/XhFooter'
   import XhIndexSwiper from '../components/index/XhIndexSwiper'
   import XhIndexNav from '../components/index/XhIndexNav'
   import XhIndexTheme from '../components/index/XhIndexTheme'
   import XhIndexList from '../components/index/XhIndexList'
+  import XhIndexClass from '../components/index/XhIndexClass'
 
     export default {
       name: "XhIndex",
       components:{
-        XhHeader,
+        XhHeaderOne,
+        XhHeaderTwo,
         XhFooter,
         XhIndexSwiper,
         XhIndexNav,
         XhIndexTheme,
         XhIndexList,
-
+        XhIndexClass
       },
       data(){
         return{
+          theme:true,
           isLoading: false,
           indexData:[],
           indexSwipers:[],
@@ -77,17 +112,39 @@
           indexBanner:[],
           indexListTheme:[],
           defaultKey:"",
+          indexDatas:"",
           indexSelect_cs:[],
           indexAuthor_cs:[],
-          indexBookList_cs:[]
+          indexBookList_cs:[],
+          listData:[],
+          indexBookList_class:[],
+          listTitle:['文学艺术','人文社科','经管励志','教育专线','生活休闲','科学技术','计算机与互联网'],
         }
       },
       created(){
+        // this.dataLoading();
+        fetch("http://localhost:3000/xinhua/api/theme").then(res => {
+          res.json().then(data => {
+            this.theme = data.theme[0].theme;
+          });
+        });
         this.loadingIndexData();
         this.SearchBefore();
       },
+      mounted(){
+        window.addEventListener('scroll', this.changeHeader, true)
+      },
       methods:{
-     loadingIndexData(){
+        changeHeader(){
+            let scrollTop =$('main').scrollTop();
+            if(scrollTop>3400){
+              $('#headerBox').css({'display':'none'});
+            }else{
+              $('#headerBox').css({'display':'block'});
+            }
+
+        },
+        loadingIndexData(){
          api.get('/api/xinhua/index').then(data => {
             // 判断http请求状态码,200为请求成功
             if (data.status === 200) {
@@ -205,7 +262,53 @@
                     this.indexAuthor_cs=item.config.carousel.carouselItems
                     return true
                   }
-                })
+                });
+
+                // 成功时接收首页的数据
+                this.indexDatas=JSON.parse(data.data.datas.designData.body);
+                var bodys =JSON.parse(data.data.datas.designData.body);
+                var alls=data.data.datas.serviceData;
+                // <!--图书分类-->
+                // 返回的数据
+                // console.log(this.indexData);
+                var indexBookList_arrs = ["body_2","body_15","body_5","body_12","body_3","body_14","body_18","body_17","body_8","body_9","body_13","body_10","body_19","body_16"]
+                var pic2=""
+                indexBookList_arrs.forEach((item,index)=>{
+                  var indexBookList_cs_per =  {
+                    pic:"",
+                    indexListBrach:[]
+                  }
+                  if(index%2==0 ||index==0){
+                    bodys.some(i=>{
+                      if(item==i.id){
+                        pic2 = i.config.image.src
+                        return true
+                      }
+                    })
+                  }else {
+                    alls[item]._DATA_.forEach(a=>{
+                      indexBookList_cs_per.indexListBrach.push({
+                        "src":a.mainImage,
+                        "tltle":item=="body_15"?a.itemName:a.name,
+                        "price1":(a.lowPrice/100).toFixed(2),
+                        "goodsId":item=="body_15"?a.itemId:a.id
+                      })
+                    });
+                    indexBookList_cs_per.pic=pic2
+                    this.indexBookList_class.push(indexBookList_cs_per);
+                  }
+                });
+                //所有需要的数据
+                for(var k=0;k<this.indexBookList_class.length;k++){
+                  for(let i=0;i<this.listTitle.length;i++){
+                    if(k==i){
+                      this.indexBookList_class[k].title = this.listTitle[i]
+                    }
+                  }
+                }
+
+
+
                 // <!--图书分类-->
                 var indexBookList_arrs = ["body_2","body_15","body_5","body_12","body_3","body_14","body_18","body_17","body_8","body_9","body_13","body_10","body_19","body_16"]
                 var pic2=""
@@ -233,7 +336,9 @@
                     })
                     indexBookList_cs_per.pic=pic2
                     this.indexBookList_cs.push(indexBookList_cs_per)
+
                   }
+                  // console.log(this.indexBookList_cs);
                 })
               } else {
                 // 失败时打印错误信息
@@ -269,12 +374,10 @@
             console.log(err)
           })
         },
-
       }
     }
 </script>
 
-<style scoped>
-  @import "../assets/css/index.css";
-
+<style>
+  /*@import "../assets/css/XhStyleOne.css";*/
 </style>

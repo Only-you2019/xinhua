@@ -2,12 +2,12 @@
 <!--  首部-->
     <div >
       <div class="XhProductDetailtop">
-        <router-link to="/">
+        <i @click="$router.back()">
           <van-icon name="arrow-left" class="topiconXhProductDetail"/>
-        </router-link>
+        </i>
         <span ref="shop">商品</span>
         <span ref="xiang" >详情</span>
-        <router-link to="/XhMyEvaluation" tag="span">
+        <router-link :to="path+'/'+itemId">
           评价
         </router-link>
         <van-icon name="ellipsis" @click="showCount" class="topiconXhProductDetail"/>
@@ -35,14 +35,15 @@
 
 <script>
     export default {
-        name: "XhProductDetailtop",
+      name: "XhProductDetailtop",
+      props:["itemId"],
       mounted () {
-        window.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('scroll', this.handleScroll,true)
       },
       data(){
           return{
             shows:false,
-
+            path:"/XhMyEvaluation"
           }
       },
       methods:{
@@ -52,7 +53,6 @@
         handleScroll () {
           var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
           // console.log(scrollTop)
-          // console.log(th is.$refs);
           if (scrollTop >600) {
             this.$refs.xiang.style.borderBottomColor = "#c62f2e"
             this.$refs.shop.style.borderBottomColor = "#F7F7F7"
@@ -67,4 +67,5 @@
 
 <style scoped>
 @import "../../assets/css/XhProductDetail.css";
+/*@import "../../assets/css/XhStyleOne.css";*/
 </style>

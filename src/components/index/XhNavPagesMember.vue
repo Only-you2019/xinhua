@@ -12,7 +12,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .XhNavPagesMember-img {
     width: 100%;
   }

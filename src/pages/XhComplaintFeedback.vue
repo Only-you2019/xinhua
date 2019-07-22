@@ -3,7 +3,8 @@
       <div class="header-cs">
         <span class="iconfont icon-fanhui" @click="$router.back()"></span>
         <span class="set-cs">意见反馈</span>
-        <span>提交</span>
+        <span @click="showToast">提交</span>
+			
       </div>
       <div class="type-cs">
         <div>
@@ -26,8 +27,9 @@
        </div>
       </div>
       <div class="upload-pic">
-        <p class="upload-pic-a">上传图片(最多5张)</p>
-        <van-uploader :after-read="afterRead" />
+        <p class="upload-pic-a">上传图片(最多3张)</p>
+        <!-- <van-uploader :after-read="afterRead" /> -->
+				<van-uploader v-model="fileList" multiple   :max-count="3"  :before-read="beforeRead" />
       </div>
       <div class="contact-way">
         <div>
@@ -42,18 +44,47 @@
 <script>
     export default {
         name: "XhComplaintFeedback",
-      data(){
-          return {
-            flag:1
-          }
-      },
-      methods: {
-        afterRead(file) {
-          // 此时可以自行将文件上传至服务器
-          // console.log(file);
-        }
-      }
+         data() {
+    return {
+      fileList: []
     }
+  },
+	methods: {
+		
+    // 返回布尔值
+    beforeRead(file) {
+      if (file.type !== 'image/png') {
+        Toast('请上传 png 格式图片');
+        return false;
+      }
+    
+      return true;
+    },
+    // 返回 Promise
+    asyncBeforeRead(file) {
+      return new Promise((resolve, reject) => {
+        if (file.type !== 'image/png') {
+          Toast('请上传 png 格式图片');
+          reject();
+        } else {
+          resolve();
+        }
+      });
+    },
+		showToast() {
+		            this.$toast({
+		                message: "提交成功",
+		              })
+									this.$router.push('/XhCountSetting')
+		  },
+  },
+	
+		
+
+	
+        }
+      
+    
 </script>
 
 <style scoped>

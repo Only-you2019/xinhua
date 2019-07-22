@@ -1,19 +1,15 @@
 <template>
 <!--  综合-->
-    <div>
-      <div class="dropdownProductsList">
+    <div style="position: relative">
+      <div class="dropdownProductsList" >
         <div class="dropdown-menu">
-          <van-dropdown-menu active-color="#c62f2e" class="aaaXhProductsList">
-            <van-dropdown-item v-model="value1" :options="option1" />
-          </van-dropdown-menu >
-<!--          <van-dropdown-menu active-color="#c62f2e" class="aaaXhProductsList">-->
-<!--            <van-dropdown-item v-model="value1" :options="option2" />-->
-<!--          </van-dropdown-menu >-->
-<!--          <van-dropdown-menu active-color="#c62f2e" class="aaaXhProductsList">-->
-<!--          <van-dropdown-item v-model="value1" :options="option3" />-->
-<!--        </van-dropdown-menu >-->
-          <p>销量</p>
-           <p>价格</p>
+            <p @click="zongHe()" :class="{cs_red:zonghe_change}">{{zonghe}}{{zonghe_change_up?'∨':'∧'}}</p>
+            <div class="xiaoliangdropdownProductsList"   @click="sale">
+              <p :class="{cs_red:sale_red}">销量</p><p class="dropdownProductsListxiaoliang"  ><span :class="{cs_red:sale_red_up}">∧</span><span   class="sureXhProductsListzz" :class="{cs_red:sale_red_down}">∨</span></p>
+            </div>
+          <div class="xiaoliangdropdownProductsList" @click="price">
+            <p :class="{cs_red:price_red}">价格</p><p  class="dropdownProductsListxiaoliang"><span :class="{cs_red:price_red_up}">∧</span><span  class="sureXhProductsListzz" :class="{cs_red:price_red_down}">∨</span></p>
+          </div>
         </div>
         <van-button type="primary" @click="showPopup"  class="buttonProductsList">
           筛选
@@ -21,10 +17,10 @@
         <van-popup v-model="show"    position="right" class="popupXhProductsList">
           <ul class="screenXhProductsList">
             <li>
-              <h3>价格区间</h3>
               <div class="popup_boxXhProductsList">
                 <input type="text" placeholder="最低价" > &nbsp; —— &nbsp; <input type="text" placeholder="最高价" >
               </div>
+              <h3>价格区间</h3>
             </li>
             <li>
               <h3>品牌</h3>
@@ -33,17 +29,17 @@
               <h3>类别</h3>
             </li>
             <li v-for="item in ListTwo">
-              <h3>{{item.group}}</h3>
-              <div class="">
-                <p v-for="i in item.nameAndCounts"  >{{i.name}}</p>
+              <div class="pXhProductsListshuang"  >
+                <span v-for="i in item.nameAndCounts" >{{i.name}}</span>
               </div>
+              <h3>{{item.group}}</h3>
             </li>
-<!--            <div class="hello">-->
-<!--              <div @click="showAll = !showAll" class="show-more">{{word}}</div>-->
-<!--              <div v-for='item in showList'>{{item}}</div>-->
-<!--            </div>-->
-    </ul>
+          </ul>
         </van-popup>
+      </div>
+      <div :class="{XhProductsListdropdown_zonghe_cs:zonghe_class_change,XhProductsListdropdown_zonghe_cs_change:!zonghe_class_change}" class="XhProductsListdropdown-zonghe-cs">
+        <div :class="{cs_red:zonghe_change_new==1}" @click="zongHeUp('综合',1)"><span>综合排序</span><span v-show="zonghe_change_new==1">√</span></div>
+        <div :class="{cs_red:zonghe_change_new==2}" @click="zongHeUp('新品',2)"><span>新品优先</span><span v-show="zonghe_change_new==2">√</span></div>
       </div>
     </div>
 </template>
@@ -54,48 +50,29 @@
       props:["ListTwo"],
       data() {
         return {
+        zonghe:"综合",
+          zonghe_change:true,//综合颜色
+          zonghe_change_up:true,//综合升降颜色
+          zonghe_change_new:true,//综合和新品颜色
+          zonghe_class_change:true,//综合动画变化类名
+          sale_red:false,//销量变色
+          sale_red_up:false,//销量升
+          sale_red_down:false,//销量降
+          price_red:false,//价格变色
+          price_red_up:false,//价格升
+          price_red_down:false,//价格降
+          //
           toLearnList:[
             'html','css','javascript','java','php'   //进行显示的数据
           ],
           showAll:false,
-          value1: 0,
-          value2: 0,
-          value3: 0,
-          option1: [
-            { text: '综合', value: 0 },
-            { text: '新品优先', value: 1 },
-          ],
-          option2: [
-            { text: '销量', value: 0 },
-            { text: '从低到高', value: 1 },
-            { text: '从高到低', value: 2 },
-          ],
-          option3: [
-            { text: '价格', value: 0 },
-            { text: '从低到高', value: 1 },
-            { text: '从高到低', value: 2 },
-          ],
           show: false,
           shows:true,
           value: 0,
           switch1: false,
           switch2: false,
-          option: [
-            { text: '出版..', value: 0 },
-            { text: '2018-01', value: 1 },
-            { text: '2017-01', value: 2 },
-            { text: '2016-04', value: 3 },
-            { text: '2019-01', value: 4 },
-            { text: '2017-05', value: 5 },
-            { text: '2019-03', value: 6 },
-            { text: '2018-07', value: 7 },
-            { text: '2015-01', value: 8 },
-            { text: '2016-06', value: 9 },
-            { text: '2013-01', value: 10 },
-          ],
-          options: [
-            { text: '仅看有货', value: 0 },
-          ]
+          option: [],
+          options: []
         }
       },
       methods: {
@@ -107,36 +84,75 @@
         },
         onConfirm() {
           this.$refs.item.toggle();
-        }
-      },
-      computed:{
-        showList:function(){
-          if(this.showAll == false){                    //当数据不需要完全显示的时候
-            var showList = [];　　　　　　　　　　　　　　　 //定义一个空数组
-            if(this.toLearnList.length > 3){　　　　　　　//这里我们先显示前三个
-              for(var i=0;i<3;i++){
-                showList.push(this.toLearnList[i])
-              }
-            }else{
-              showList = this.toLearnList
-            }
-            return showList;　　　　　　　　　　　　　　　　 //返回当前数组
-          }else{
-            return this.toLearnList;
+        },
+        //综合标题方法
+        zongHe(){
+          this.zonghe_change_up=!this.zonghe_change_up
+          this.zonghe_class_change=!this.zonghe_class_change
+        },
+        //综合/新品选择
+        zongHeUp(item,flag){
+          this.price_red=0
+          this.price_red_up=0
+          this.price_red_down=0
+          this.sale_red=0
+          this.sale_red_up=0
+          this.sale_red_down=0
+          this.zonghe_change=1
+          this.zonghe=item
+          this.zonghe_change_new=flag
+          this.zonghe_class_change=!this.zonghe_class_change
+          this.zonghe_change_up = 1
+          if(item=="新品"){
+            this.$emit("xinPinApi",30)
+          }else {
+            this.$emit("xinPinApi","")
           }
         },
-        word:function(){
-          if(this.showAll == false){　　　　　　　　　　　//对文字进行处理
-            return '展开'
-          }else{
-            return '收起'
+        //销量升降
+        sale(){
+          this.zonghe_change_new=0
+          this.zonghe_change=0
+          this.price_red=0
+          this.price_red_up=0
+          this.price_red_down=0
+          this.sale_red=1
+          if(this.sale_red_up){
+            this.sale_red_up=0
+            this.sale_red_down=1
+            this.$emit("xinPinApi",10)
+          }else {
+            this.sale_red_up=1
+            this.sale_red_down=0
+            this.$emit("xinPinApi",11)
           }
+        },
+        //价格升降
+        price(){
+          this.zonghe_change_new=0
+          this.zonghe_change=0
+          this.sale_red=0
+          this.sale_red_up=0
+          this.sale_red_down=0
+           this.price_red=1
+          if(this.price_red_up){
+            this.price_red_up=0
+            this.price_red_down=1
+            this.$emit("xinPinApi",40)
+          }else {
+            this.price_red_up=1
+            this.price_red_down=0
+            this.$emit("xinPinApi",41)
+          }
+
         }
-      }
+      },
+
+
     }
 </script>
 
-<style scoped>
-  @import "../../assets/css/XhProductsList.css";
-
+<style>
+  /*@import "../../assets/css/XhProductsList.css";*/
+  /*@import "../../assets/css/XhStyleOne.css";*/
 </style>

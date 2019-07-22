@@ -1,9 +1,9 @@
 <template>
     <div>
       <div class="XhProductDetailtop">
-        <router-link to="this.$router.back">
+        <span @click="$router.back()">
           <van-icon name="arrow-left" class="topiconXhProductDetailtop"/>
-        </router-link>
+        </span>
         <span>评价</span>
       </div>
     </div>

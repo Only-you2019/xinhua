@@ -1,12 +1,12 @@
 <template>
   <div class="XhFirmOrderFreight">
       <div class="XhFirmOrderFreight-left">
-        <p class="XhFirmOrderFreight-left-text">运费</p>
-        <p class="XhFirmOrderFreight-left-desc">已选0张</p>
+        <p class="XhFirmOrderFreight-left-text">{{left}}</p>
+        <p class="XhFirmOrderFreight-left-desc"></p>
       </div>
       <div class="XhFirmOrderFreight-right">
         <div class="XhFirmOrderFreight-right-price-wrapper">
-          <p class="XhFirmOrderFreight-right-price">快递 ￥6.00</p>
+          <p class="XhFirmOrderFreight-right-price">{{right}}</p>
         </div>
         <div class="XhFirmOrderFreight-right-icon-wrapper">
           <i class="iconfont">&#xe62d;</i>
@@ -17,7 +17,8 @@
 
 <script>
 export default {
-  name : 'XhFirmOrderFreight'
+  name : 'XhFirmOrderFreight',
+  props:["left","right"]
 }
 </script>
 

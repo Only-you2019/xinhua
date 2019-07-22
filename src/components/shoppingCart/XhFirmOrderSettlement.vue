@@ -6,7 +6,7 @@
           <p>商品总价</p>
         </div>
         <div class="XhFirmOrderSettlement-Total-money">
-          <p>￥33.25</p>
+          <p>{{'￥'+allPrice}}</p>
         </div>
       </div>
       <div class="XhFirmOrderSettlement-freight-wrapper XhFirmOrderSettlement-flex">
@@ -14,7 +14,7 @@
           <p>运费</p>
         </div>
         <div class="XhFirmOrderSettlement-freight-money">
-          <p>￥6.00</p>
+          <p>￥0.00</p>
         </div>
       </div>
       <div class="XhFirmOrderSettlement-Discount-wrapper XhFirmOrderSettlement-flex">
@@ -22,7 +22,7 @@
           <p>平台优惠</p>
         </div>
         <div class="XhFirmOrderSettlement-Discount-money">
-          <p>-￥2.00</p>
+          <p>-￥0.00</p>
         </div>
       </div>
       <div class="XhFirmOrderSettlement-Total-orders-wrapper XhFirmOrderSettlement-flex">
@@ -30,7 +30,7 @@
           <p>订单总额</p>
         </div>
         <div class="XhFirmOrderSettlement-Total-orders-money">
-          <p class="XhFirmOrderSettlement-Total-amount-money">￥37.25</p>
+          <p class="XhFirmOrderSettlement-Total-amount-money">{{'￥'+allPrice}}</p>
         </div>
       </div>
     </div>
@@ -41,7 +41,8 @@
 
 <script>
 export default {
-  name : 'XhFirmOrderSettlement'
+  name : 'XhFirmOrderSettlement',
+  props:["allPrice"]
 }
 </script>
 

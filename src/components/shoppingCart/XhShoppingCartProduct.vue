@@ -1,22 +1,22 @@
 <template>
     <div class="XhShoppingCartProduct">
       <div class="XhShoppingCartShopName">
-        <van-checkbox v-model="product.checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked" @click="allChecked"></van-checkbox>
+        <van-checkbox v-model="product.checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked" @click="allChecke"></van-checkbox>
         <van-icon name="shop-o" class="XhShoppingCartShopIcon"/>
         <h4 class="XhShoppingCartShopTitle">新华书店网上商城自营图书</h4>
         <van-button type="primary" @click="showPopup" class="XhShoppingCartDiscountsBox">
           <van-icon name="coupon-o" class="XhShoppingCartShopCoupon"/>
         </van-button>
       </div>
-      <div class="XhShoppingCartProductInfo" v-for="(item,index) in product.data">
-        <van-checkbox v-model="item.checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked"></van-checkbox>
+      <div class="XhShoppingCartProductInfo" v-if="product.data.length>0" v-for="(item,index) in product.data">
+        <van-checkbox v-model="item.checked" checked-color="#c72f2e" class="XhShoppingCartShopChecked" @click="onecheck"></van-checkbox>
         <div class="Product">
-          <img :src="item.img" alt="" class="ProductImg">
+          <img :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(JSON.parse(item.extension).img)" alt="" class="ProductImg">
           <h5 class="ProductH5">{{item.name}}</h5>
-          <p class="ProductPrice">{{item.price}}</p>
+          <p class="ProductPrice"><span>￥</span>{{JSON.parse(item.extension).price}}</p>
           <div class="AddReduce">
             <span class="numberReduce" @click="reduce(index)">-</span>
-            <span class="ProductNumber">{{item.value}}</span>
+            <span class="ProductNumber">{{item.num}}</span>
             <span class="numberAdd" @click="add(index)">+</span>
           </div>
         </div>
@@ -25,38 +25,38 @@
         <div class="PopupDiscounts">
           <div class="PopupDiscountsHeader">
             <span class="DiscountTitle">优惠卷</span>
-            <van-icon name="cross"  class="IconsCross"/>
+            <van-icon name="cross"  class="IconsCross" @click="changeShow"/>
           </div>
           <div class="PopupDiscountsBox">
-            <div class="PopupDiscountsMain">
+            <div class="PopupDiscountsMain" ref="box">
               <span class="SaveMoney">￥5.00</span>
               <span class="ProductDemand">仅限部分图书商品使用</span>
               <span class="PriceDemand">满60.00元可以使用</span>
               <span class="PeriodOfValidity">2019.07.01-2021.01.01</span>
               <button class="ImmediatelyReceive">立即领取</button>
             </div>
-            <div class="PopupDiscountsMain">
+            <div class="PopupDiscountsMain" ref="box">
               <span class="SaveMoney">￥5.00</span>
               <span class="ProductDemand">仅限部分图书商品使用</span>
               <span class="PriceDemand">满60.00元可以使用</span>
               <span class="PeriodOfValidity">2019.07.01-2021.01.01</span>
               <button class="ImmediatelyReceive">立即领取</button>
             </div>
-            <div class="PopupDiscountsMain">
+            <div class="PopupDiscountsMain" ref="box">
               <span class="SaveMoney">￥5.00</span>
               <span class="ProductDemand">仅限部分图书商品使用</span>
               <span class="PriceDemand">满60.00元可以使用</span>
               <span class="PeriodOfValidity">2019.07.01-2021.01.01</span>
               <button class="ImmediatelyReceive">立即领取</button>
             </div>
-            <div class="PopupDiscountsMain">
+            <div class="PopupDiscountsMain" ref="box">
               <span class="SaveMoney">￥5.00</span>
               <span class="ProductDemand">仅限部分图书商品使用</span>
               <span class="PriceDemand">满60.00元可以使用</span>
               <span class="PeriodOfValidity">2019.07.01-2021.01.01</span>
               <button class="ImmediatelyReceive">立即领取</button>
             </div>
-            <div class="PopupDiscountsMain">
+            <div class="PopupDiscountsMain" ref="box">
               <span class="SaveMoney">￥5.00</span>
               <span class="ProductDemand">仅限部分图书商品使用</span>
               <span class="PriceDemand">满60.00元可以使用</span>
@@ -64,7 +64,7 @@
               <button class="ImmediatelyReceive">立即领取</button>
             </div>
           </div>
-          <div class="PopupDiscountsBottom">
+          <div class="PopupDiscountsBottom" @click="changeShow">
             完成
           </div>
         </div>
@@ -92,10 +92,23 @@
           add(index){
             this.$emit("addf",index);
           },
-          allChecked(){
-            this.$emit("allChecked",index);
+          allChecke(){
+            this.$emit("allChecked");
+          },
+          onecheck(){
+            this.$emit("onechecked")
+          },
+          urlEncode(str){
+            if(str.indexOf("https:")==-1){
+              str="https:"+str
+              return encodeURI(str)
+            }else{
+              return encodeURI(str)
+            }
+          },
+          changeShow(){
+            this.show=false
           }
-
         }
     }
 </script>
@@ -151,10 +164,12 @@
   .ProductH5{
     width: 2rem;
     font-size: 0.28rem;
-    height: 0.28rem;
     margin-top: 0.3rem;
     margin-left: 0.6rem;
     float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .ProductPrice{
     font-size: 0.24rem;
@@ -216,7 +231,7 @@
     margin-bottom: 0.25rem;
     width: 7rem;
     height: 2.1rem;
-    background: url("//assets-m.xinhuashudian.com/assets/files/normal.322f4f66744fa967.png");
+    background-image: url('../../../static/images/commons/discounts.png');
     background-size: 100% 100%;
     display: flex;
     justify-content: space-between;

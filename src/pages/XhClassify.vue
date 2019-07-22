@@ -3,12 +3,16 @@
     <header>
       <xh-classify-header :defaultKey="defaultKey"/>
     </header>
-      <main class="flex">
-        <classify-nav :navList="navList" @changeList="changeList" />
-        <div class="nav-right">
-          <classify-list :bookList="bookList"/>
+      <main  >
+        <div  class="flex" v-if="navList.length">
+          <classify-nav :navList="navList" @changeList="changeList" />
+          <div class="nav-right">
+            <classify-list :bookList="bookList"/>
+          </div>
         </div>
+        <van-loading v-if="!navList.length" size="54px" color="#C62F2E" style="position: fixed;top:50%;left:50%;margin-left: -0.88rem">加载中...</van-loading>
       </main>
+
     <xh-footer />
   </div>
 </template>
@@ -94,5 +98,6 @@
 </script>
 
 <style scoped>
- @import '.././assets/css/classify/classify.css';
+ /*@import '.././assets/css/XhStyleOne.css';*/
+  @import '../assets/css/classify.css';
 </style>

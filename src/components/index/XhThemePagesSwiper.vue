@@ -42,7 +42,7 @@
     }
 </script>
 
-<style scoped>
+<style>
   .wrapper {
     overflow: hidden;
     width: 100%;

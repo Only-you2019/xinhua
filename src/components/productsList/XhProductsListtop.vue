@@ -6,10 +6,10 @@
           <van-icon name="arrow-left" class="topiconXhProductDetailtop"/>
         </router-link>
         <div>
-          <input type="text" name="" id="">
+          <input type="text" name="" id="" @click="$router.push('/XhSearch')">
           <van-icon name="search" class="fangdajingXhProductDetailtop" />
         </div>
-        <div @click="showCount">
+        <div >
           <van-icon name="qr" v-show="shows" class="topiconXhProductDetailtop"  />
           <van-icon name="apps-o" v-show="!shows" class="topiconXhProductDetailtop"  />
         </div>
@@ -26,15 +26,13 @@
          }
         },
       methods: {
-        showCount(){
-          this.shows = !this.shows;
-          this.$emit("showCountaa")
-        }
+
       },
     }
 </script>
 
-<style scoped>
-  @import "../../assets/css/XhProductsList.css";
+<style>
+  /*@import "../../assets/css/XhProductsList.css";*/
+  /*@import "../../assets/css/XhStyleOne.css";*/
 
 </style>

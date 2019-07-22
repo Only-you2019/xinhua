@@ -47,7 +47,7 @@
     }
 </script>
 
-<style scoped>
+<style>
   .XhThemePagesInitiation {
     margin-top: .1rem;
     padding-top: .3rem;

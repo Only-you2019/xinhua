@@ -16,22 +16,40 @@
 
 <script>
   import areaList from "../assets/js/三级联动"
+  import api from '.././XinHuaApi'
     export default {
 
       name: "XhCreateAddress",
       data() {
         return {
           areaList,
-          searchResult: []
+          searchResult: [],
+          information: {
+            name: "",
+            gender: "null",
+            year: "",
+            month: "",
+            day: "",
+            province: "",
+            city: "",
+            county: "",
+            address: ""
+          }
         }
       },
       methods: {
-        onSave() {
-          this.$toast('save');
-        },
+        onSave(content) {
+          var information = content
+          information.address = content.addressDetail
+          // console.log(content);
+          this.$router.push({path: "/XhAddressManagement", query: {information: information}})
+          this.$toast('添加成功');
+        }
       }
-
     }
+
+
+
 
 </script>
 

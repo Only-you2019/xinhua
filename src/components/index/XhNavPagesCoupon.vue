@@ -14,7 +14,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .XhNavPagesCoupon-img {
     width: 100%;
   }

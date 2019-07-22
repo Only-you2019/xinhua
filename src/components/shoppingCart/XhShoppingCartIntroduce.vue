@@ -10,7 +10,7 @@
         <li class="XhShoppingCartIntroduce-list">
           <router-link to="">
             <div class="XhShoppingCartIntroduce-img-wrapper">
-              <img class="XhShoppingCartIntroduce-img" src="https://img2.xinhuashudian.com/bookbasepic/C/02312/3664061-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" alt="">
+              <img class="XhShoppingCartIntroduce-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)" alt="">
             </div>
             <p class="XhShoppingCartIntroduce-list-title">运营之光2.0：我的互联网运营方法论与自白</p>
             <p class="XhShoppingCartIntroduce-list-author">黄有璨</p>
@@ -20,7 +20,7 @@
         <li class="XhShoppingCartIntroduce-list">
           <router-link to="">
             <div class="XhShoppingCartIntroduce-img-wrapper">
-              <img class="XhShoppingCartIntroduce-img" src="https://img2.xinhuashudian.com/bookbasepic/C/02312/3664061-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" >
+              <img class="XhShoppingCartIntroduce-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)" >
             </div>
             <p class="XhShoppingCartIntroduce-list-title">余华作品：我只知道人是什么</p>
             <p class="XhShoppingCartIntroduce-list-author">余华</p>
@@ -30,7 +30,7 @@
         <li class="XhShoppingCartIntroduce-list">
           <router-link to="">
             <div class="XhShoppingCartIntroduce-img-wrapper">
-              <img class="XhShoppingCartIntroduce-img" src="https://img2.xinhuashudian.com/bookbasepic/C/02312/3664061-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" >
+              <img class="XhShoppingCartIntroduce-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)" >
             </div>
             <p class="XhShoppingCartIntroduce-list-title">月亮冰激凌(精)</p>
             <p class="XhShoppingCartIntroduce-list-author">(韩)白希那</p>
@@ -40,7 +40,7 @@
         <li class="XhShoppingCartIntroduce-list">
           <router-link to="">
             <div class="XhShoppingCartIntroduce-img-wrapper">
-              <img class="XhShoppingCartIntroduce-img" src="https://img2.xinhuashudian.com/bookbasepic/C/02312/3664061-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200" >
+              <img class="XhShoppingCartIntroduce-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(this.url)" >
             </div>
             <p class="XhShoppingCartIntroduce-list-title">俞敏洪：在人生的更高处相见</p>
             <p class="XhShoppingCartIntroduce-list-author">俞敏洪</p>
@@ -54,7 +54,22 @@
 
 <script>
   export default {
-    name: "XhShoppingCartIntroduce"
+    name: "XhShoppingCartIntroduce",
+    data(){
+      return{
+        url:"//img2.xinhuashudian.com/bookbasepic/C/02312/3664061-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200"
+      }
+    },
+    methods:{
+      urlEncode(str){
+        if(str.indexOf("https:")==-1){
+          str="https:"+str
+          return encodeURI(str)
+        }else{
+          return encodeURI(str)
+        }
+      },
+    }
   }
 </script>
 

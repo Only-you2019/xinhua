@@ -28,7 +28,9 @@
     }
 </script>
 
-<style scoped>
+<style>
+  /*@import "../../assets/css/XhStyleOne.css";*/
+
   .XhSearchLately{
     width: 100%;
     margin-top:.75rem ;

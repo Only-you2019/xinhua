@@ -78,4 +78,6 @@
 
 <style scoped>
 @import "../assets/css/XhManageAddress.css";
+/*@import '../assets/css/XhStyleOne.css';*/
+
 </style>

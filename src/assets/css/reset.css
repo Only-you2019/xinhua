@@ -77,3 +77,24 @@ body,html{
 .sti{
   position:sticky;
 }
+
+/*底部样式*/
+.footer-box{
+  height: 1.1rem;
+  background-color:  rgb(243, 243, 239);;
+  border-top:1px solid rgba(0, 0, 0, 0.3);
+}
+.footer-box ul{
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.footer-box ul li a i{
+  font-size:0.4rem;
+  font-weight: 700;
+}
+.footer-box ul li p{
+  font-size: 0.26rem;
+}

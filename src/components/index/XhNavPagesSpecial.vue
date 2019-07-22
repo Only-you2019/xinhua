@@ -14,7 +14,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .XhNavPagesSpecial-img {
     width: 100%;
     margin-bottom: .2rem;

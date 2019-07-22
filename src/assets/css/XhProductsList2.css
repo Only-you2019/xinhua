@@ -1,5 +1,5 @@
 .XhProductsList{
-background-color: #f7f7f7;
+/*background-color: #f7f7f7;*/
   height: 100%;
 }
 /*首部*/
@@ -43,7 +43,7 @@ background-color: #f7f7f7;
 /*详情列表*/
 .imgboxfourProductsList{
   width: 3rem;
-  height: 3rem;
+  height: 100%;
   display: flex;
 
 }
@@ -53,21 +53,31 @@ background-color: #f7f7f7;
 }
 .gridProductsList{
   font-size: .3rem;
-  background-color: #f7f7f7;
+  /*background-color: #f7f7f7;*/
   height: 100%;
+  position: absolute;
+  z-index:0;
+  top: 2.5rem
 }
 .gridProductsList p{
   margin-top: .3rem;
   text-align: left;
-
+  /*line-height: .5rem;*/
+}
+.fourgridProductsListbox{
+  height: 100%;
+  font-size: .26rem;
+  background-color: #F7F7F7;
 }
 .gridProductsListbox{
   margin-top: .2rem!important;
-  /*margin-right: .3rem;*/
-  /*width: 2rem;*/
   z-index: 0;
+  /*height: 100rem;*/
+  /*background-color: #F7F7F7;*/
   border-radius: .1rem;
-text-align: left;
+  text-align: left;
+  height: 100%;
+  background-color: #F7F7F7;
 }
 .van-grid-item[data-v-1b7315d6]{
   margin-bottom: 0px;
@@ -75,6 +85,7 @@ text-align: left;
 .aaXhProductsList{
   font-size: .3rem;
   padding-top: .3rem;
+  margin-bottom: .2rem;
 }
 .bbXhProductsList{
   color: #ccc;
@@ -88,6 +99,9 @@ text-align: left;
 }
 /*綜合*/
 .dropdownProductsList{
+  position:fixed;
+  z-index:16;
+  width: 100vw;
   margin-top: 1rem;
   display: flex;
   justify-content: space-around;
@@ -198,77 +212,6 @@ padding-top: .28rem;
   width: 1rem;
   border-radius: .1rem;
 }
-/*.onlyProductsList{*/
-/*  display: flex;*/
-/*  justify-content: space-around;*/
-/*  !*padding-top: .2rem;*!*/
-/*  !*margin-bottom: .5rem;*!*/
-/*text-align: left;*/
-/*}*/
-/*.wenProductsList{*/
-/*  display: flex;*/
-/*  justify-content: space-around;*/
-/*  border-bottom: 1px solid #fff;*/
-/*background-color: #fff;*/
-/*  width: 3rem ;*/
-/*  height: .5rem;*/
-/*  !*padding-top: .5rem;*!*/
-/*}*/
-/*.sureProductsList{*/
-/*  display: flex;*/
-/*  margin-top: .8rem;*/
-/*  justify-content: space-around;*/
-/*}*/
-/*.sureProductsList p:nth-of-type(1){*/
-/*  display: inline-block;*/
-/*  width: 3.5rem;*/
-/*  height: 1rem;*/
-/*line-height: 1rem;*/
-/*  color: #404040;*/
-/*  background-color:#fff ;*/
-/*  border: 1px solid #ccc;*/
-/*  border-radius: .1rem;*/
-/*}*/
-/*.sureProductsList p:nth-of-type(2){*/
-/*  display: inline-block;*/
-/*  width: 3.5rem;*/
-/*  line-height: 1rem;*/
-/*height: 1rem;*/
-/*  color: #fff;*/
-/*  border-radius: .1rem;*/
-
-/*  background-color:#c62f2e ;*/
-/*  !*border: 1px solid #ccc;*!*/
-/*}*/
-/*.onlyProductsList p{*/
-/*  border-radius: .1rem;*/
-/*  display: inline-block;*/
-/*  width: 1.5rem;*/
-/*  height: .5rem;*/
-/*  color: rgb(153, 153, 153);*/
-/*  line-height: .5rem;*/
-/*  text-align: center;*/
-/*  background-color: #fff;*/
-/*  font-size: .28rem;*/
-/*  border: 1px solid #fff;*/
-/*}*/
-/*.speakProductsList {*/
-/*  font-size: .12rem;*/
-/*  background-color: #fff;*/
-/*  color: rgb(153, 153, 153);*/
-/*  border-color: #fff;*/
-/*  height: .5rem;*/
-/*  line-height: .5rem;*/
-/*}*/
-/*.showyuProductsList{*/
-/*  width: 100%;*/
-/*  height: 3rem;*/
-/*  background-color: #fff;*/
-/*  z-index: 999;*/
-/*  margin-top: .2rem;*/
-/* padding-top: .3rem;*/
-/*  !*display: none;*!*/
-/*}*/
 /*銷量*/
 .popupXhProductsList{
   /*background-color: #ee9900;*/
@@ -286,8 +229,9 @@ padding-top: .28rem;
   color: rgb(153, 153, 153);
   border: 0;
   background-color: #F7F7F7;
-  /*padding-top: .1rem;*/
-  font-size: .3rem;
+  font-size: .29rem;
+  position: relative;
+  top: -.05rem;
 }
 .popup_boxXhProductsList{
   display: flex;
@@ -306,8 +250,11 @@ padding-top: .28rem;
   width: 2rem;
   background-color: #74787a;
 }
-.screenXhProductsList li h2{
-  margin-top: .48rem;
+.screenXhProductsList{
+  margin-top: 1.3rem;
+}
+.screenXhProductsList li h3{
+  /*margin-top: .3rem;*/
   margin-bottom: .3rem;
   /*text-align: left;*/
   /*color: #74787a;*/
@@ -315,38 +262,75 @@ padding-top: .28rem;
 .screenXhProductsList li {
   margin-left: .26rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   flex-wrap: wrap;
+  justify-content: flex-start;
   /*background-color: #795da3;*/
 }
-.screenXhProductsList li p{
+.pXhProductsListshuang   span{
+  display: inline-block;
   text-align: center;
   background-color: #cccccc;
-  width: 2.78rem;
+  width: 1.78rem;
   height: .57rem;
   line-height: .57rem;
   border-radius: .1rem;
-  margin: .26rem;
-  font-size: .25rem;
+  margin-right: .26rem;
+  margin-top: .2rem;
+  font-size: .23rem;
+  overflow : hidden;
+  text-overflow: ellipsis;
+}
+.pXhProductsListshuang{
+  height: 2.6rem;
+  overflow: auto;
 }
 .timeXhProductsList{
   display: flex;
 }
 /*列表小*/
+.twostwopri_boxsonlyProductsList{
+  height: 100%;
+  width:7.5rem;
+  /*background-color: #F7F7F7;*/
+}
 .gridproductsListsmall{
   display: flex;
   margin-left: .3rem;
   margin-top: .2rem;
   font-size: .14rem;
+  height: 3rem;
+  padding-top: .2rem;
+  width: 7rem;
+  background-color: #fff;
+  z-index: 0;
   /*height: 4rem;*/
+}
+
+.parentlistProductsList{
+  position: relative;
+}
+.likeccXhProductsList{
+    font-size: .5rem;
+  display: flex;
+  justify-content: space-around;
+  height: .5rem;
+  width: 1.5rem;
+ margin-left: 5.5rem;
+  position: absolute;
+  bottom: 0.2rem;
+}
+.XhProductsList{
+  background-color: #F7F7F7;
+  height: 100%;
 }
 .pri_boxsonlyProductsList{
   width: 2rem;
-  height: 2rem;
+  height: 2.2rem;
 }
 .pri_boxsonlyProductsList img{
-  width: 100%;
-  height: 100%;
+  width: 2rem;
+  height: 2.2rem;
 }
 .gridsmall_box{
   width: 5rem;
@@ -376,11 +360,8 @@ padding-top: .28rem;
   background-color: #fff;
   color: #000;
   margin: .2rem 0;
-
 }
 .InstockonlyProductsList{
-  /*height: 1rem;*/
-  /*line-height: 0;*/
   font-size: .1rem;
   background-color: #fff;
 }
@@ -389,7 +370,6 @@ padding-top: .28rem;
 color: rgb(153, 153, 153);
   height: .5rem;
   width: 1.4rem;
-  /*margin-bottom: .3rem;*/
   border-radius: .1rem;
   background-color: #fff;
 }
@@ -399,12 +379,12 @@ color: rgb(153, 153, 153);
   width: 1.8rem;
   display: flex;
   justify-content: space-around;
-  /*margin-bottom: .3rem;*/
   border-radius: .1rem;
   background-color: #fff;
 }
 .van-dropdown-menu{
   height: .5rem;
+  position: absolute;
 }
 .van-dropdown-menu__title{
   font-size: .12rem!important;
@@ -427,10 +407,6 @@ color: rgb(153, 153, 153);
   -webkit-box-orient: vertical;
 }
 .towwenXhProductsList{
-  /*width:3rem;*/
-  /*text-overflow:ellipsis;*/
-  /*white-space:nowrap;*/
-  /*overflow:hidden;*/
   overflow : hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -439,26 +415,148 @@ color: rgb(153, 153, 153);
 }
 .gridssbbXhProductsList{
   color: #e61818;
-  font-size: .3rem;
-  /*overflow: hidden;*/
-  /*text-overflow: ellipsis;*/
-  /*white-space: nowrap;*/
+  font-size: .33rem;
 }
 .onlyProductsListchian{
   display: flex;
   justify-content: space-around;
 }
-.gridProductsListboximg img{
-  width: 100%;
+.gridProductsListboximg{
+  width: 3rem;
+  height: 3.5rem;
+}
+.twopri_boxsonlyProductsList{
   height: 100%;
+  width: 100%;
+  background-color: #F7F7F7;
+}
+.XhProductsList{
+  height: 100%;
+  width: 100%;
+  background-color: #F7F7F7;
+}
+.XhProductsListdropdown_zonghe_cs{
+  transition: all 0.3s;
+  position: fixed;
+  background-color: white;
+  z-index:15;
+  font-size: 14px;
+  top:-0.2rem;
+
+}
+.XhProductsListdropdown_zonghe_cs_change{
+  transition: all 0.3s;
+  position: fixed;
+  background-color: white;
+  z-index:15;
+  font-size: 14px;
+  top:1.7rem;
+
 }
 
-.gridProductsListboximg{
-  height: 4.7rem;
+.XhProductsListdropdown-zonghe-cs>div{
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  padding: 0 0.8rem;
+  margin: 0.3rem 0;
 }
-/*.pXhProductsListshuang{*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  flex-wrap: wrap;*/
-/*  width: 6.3rem;*/
-/*}*/
+
+/*dasheng*/
+.cs_red{
+  color: #c62f2e;
+}
+.XhProductsListonly-cs{
+  position: fixed;
+  z-index: 6;
+  top: 1.85rem;
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  background-color:#f7f7f7 ;
+  height: 0.8rem;
+  padding-top: .1rem;
+}
+.XhProductsListonly-cs>div{
+  background-color: white;
+  text-align: center;
+  width:1.52rem;
+  height: 0.57rem;
+  line-height: 0.57rem;
+  color: #939393;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.XhProductsListonly-cs>div.XhProductsListonly_cs_red{
+  color: #c62f2e;
+  border: 1px solid #c62f2e;
+}
+.XhProductsListonly-two-cs{
+  max-height: 10.84rem;
+  width: 100vw;
+  background-color: #ffffff;
+  position: fixed;
+  z-index:100;
+  top: 2.48rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding:0 0.3rem 0 0.3rem ;
+  text-align: left;
+  overflow-y: scroll;
+}
+.XhProductsListonly-two-cs>div{
+  width: 3.16rem;
+  height: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  border-bottom: 1px solid #ededed;
+  line-height: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+}
+.XhProductsListonly-two-cs>div:last-child{
+  margin-top: 0.2rem;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: none;
+}
+.XhProductsListonly-two-cs>div:last-child>div{
+  width: 3.12rem;
+  height: 0.88rem;
+  text-align: center;
+}
+.XhProductsListonly-two-cs>div.box_select_red{
+  color: #c62f2e;
+  border-bottom:1px solid #c62f2e;
+}
+.ttttwostwopri_boxsonlyProductsList{
+  position: absolute;top: 2.56rem;
+}
+.czhiXhProductsListonly{
+  background-color: white;
+  border: whitesmoke 1px solid;
+}
+.sureXhProductsLists{
+  background-color:#c72f2e;
+  color: white;
+}
+.xiaoliangdropdownProductsList{
+  display: flex;
+  position: relative;
+}
+.sureXhProductsListzz{
+  position: absolute;
+  top: 0.2rem;
+}
+.dropdownProductsListxiaoliang{
+  display: flex;
+  flex-direction: column;
+  font-size: 8px;
+  position: absolute;
+  right:-0.24rem;
+  top:-0.1rem;
+}

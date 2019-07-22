@@ -39,7 +39,9 @@
     }
 </script>
 
-<style scoped>
+<style>
+  /*@import "../../assets/css/XhStyleOne.css";*/
+
   .XhSearchHeader{
     width: 100%;
     height: .88rem;

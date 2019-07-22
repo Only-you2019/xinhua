@@ -58,7 +58,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .XhNavPagesRecommenDation {
     margin-top: .2rem;
     background: #fff;

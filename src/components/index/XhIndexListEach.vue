@@ -33,6 +33,6 @@
     }
 </script>
 
-<style scoped>
-  @import '../../assets/css/index.css';
+<style>
+  /*@import '../../assets/css/index.css';*/
 </style>

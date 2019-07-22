@@ -10,15 +10,14 @@
 	  <div class="XhMyOrder-Bigbox">
 	  	<img src="../../static/images/mine/xhimg/xz.png">
 	  	<h6>暂无相关订单</h6>
-	  	<a href=""><span>随便逛逛</span></a>
+	  	<router-link to="/"><span>随便逛逛</span></router-link>
 	  </div>
   </van-tab>
   <van-tab title="已评价" name="b">
 	  <div class="XhMyOrder-Bigbox">
 	  	<img src="../../static/images/mine/xhimg/comment-empty.9577180f12b0d799.png">
 	  	<h6>暂无评价</h6>
-	  	<a href=""><span>随便逛逛</span></a>
-	  </div> 
+<router-link to="/"><span>随便逛逛</span></router-link>	  </div> 
   </van-tab>
 </van-tabs>
 	</div>
@@ -90,15 +89,15 @@
 	.XhMyOrder-Bigbox a{
 		display: block;
 		width: 3rem;
-		height: 1rem;
+		height: .8rem;
 		background: #c62f2e;
 		margin-left: 2.4rem;
 		margin-top: .3rem;
 	}
 	.XhMyOrder-Bigbox span{
 		display: block;
-		font-size: 20px;
+		font-size: 18px;
 		color: white;
-		line-height: 1rem;
+		line-height: .8rem;
 	}
 </style>

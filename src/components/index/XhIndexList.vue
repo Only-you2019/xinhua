@@ -13,7 +13,7 @@
     import XhIndexListEach from "./XhIndexListEach"
     import XhIndexSelectBanner from './XhIndexSelectBanner'
     export default {
-      name: "XhIndexList",
+      name:"XhIndexList",
       props:['listData'],
       components:{
         XhIndexListHeader,
@@ -23,6 +23,6 @@
     }
 </script>
 
-<style scoped>
-  @import '../../assets/css/index.css';
+<style>
+  /*@import '../../assets/css/XhStyleOne.css';*/
 </style>

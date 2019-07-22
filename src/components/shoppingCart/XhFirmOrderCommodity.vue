@@ -10,17 +10,17 @@
           </div>
         </div>
       </div>
-      <div class="XhFirmOrderCommodity-content">
+      <div class="XhFirmOrderCommodity-content" v-if="product.length>0" v-for="(item,index) in product">
         <div class="XhFirmOrderCommodity-content-img-wrapper">
-          <img class="XhFirmOrderCommodity-content-img" src="https://img7.xinhuashudian.com/images/4401721-fm.jpg?x-oss-process=image/resize,m_lfit,limit_0,w_200,h_200">
+          <img class="XhFirmOrderCommodity-content-img" :src="'http://api.hll666.xyz/api/xinhua/img?imgUrl='+urlEncode(JSON.parse(item.extension).img)">
         </div>
         <div class="XhFirmOrderCommodity-content-Name-price">
           <div class="XhFirmOrderCommodity-content-Name">
-            <p>别再吃苦的年纪选择安逸</p>
+            <p>{{item.name}}</p>
           </div>
           <div class="XhFirmOrderCommodity-content-price-Number">
-            <p class="XhFirmOrderCommodity-content-price">￥33.25</p>
-            <span class="XhFirmOrderCommodity-content-Number">x1</span>
+            <p class="XhFirmOrderCommodity-content-price">{{'￥'+JSON.parse(item.extension).price*item.num}}</p>
+            <span class="XhFirmOrderCommodity-content-Number">{{'X'+item.num}}</span>
           </div>
         </div>
       </div>
@@ -35,7 +35,18 @@
 
 <script>
 export default {
-  name : 'XhFirmOrderCommodity'
+  name : 'XhFirmOrderCommodity',
+  props:["product"],
+  methods:{
+    urlEncode(str){
+      if(str.indexOf("https:")==-1){
+        str="https:"+str
+        return encodeURI(str)
+      }else{
+        return encodeURI(str)
+      }
+    },
+  }
 }
 </script>
 

@@ -8,20 +8,13 @@
         <div class="pic-cs">
           <span @click="on">头像</span>
           <div>
-            <img src="../../static/cs/个人资料_03.png" @click="on" >
+            <van-uploader :after-read="afterRead">
+            <img src="../../static/cs/个人资料_03.png" @click="on" ref="imgcs" style="border-radius:50%">
+            </van-uploader>
             <i class="iconfont icon-jiantouyou"  @click="on"></i>
           </div>
-					<van-popup v-model="pushow" :style="{ height: '30%', width:'80%' }">
-						<div class="main-cs-one">
-							<div class="main-cs-one-one">
-								<h3>请选择</h3>
-						<a href=""><h3>拍照</h3></a>	
-							<a href="">	<h3>相册</h3></a>
-							</div>
-			         <div class="main-cs-one-two"><span>取消</span></div>
-						</div>
-					</van-popup>
         </div>
+
 					
         <div class="name-cs">
           <span  @click="nc">昵称</span>
@@ -36,7 +29,7 @@
 								<span>浏览记录</span>
 							</div>
 							<div class="name-cs-one-nav">
-								<span>昵称</span></br>
+								<span>昵称</span>
 								<input type="text" value="孔式"/>
 							</div>
 							<div class="name-cs-two"><span>保存</span></div>
@@ -46,33 +39,30 @@
 				
         <div class="birthday-cs">
           <span @click="er">生日</span>
-          <div>
-            <span @click="er">1994-08-06</span>
+          <div @click="er">
+            <span>{{birsday}}</span>
             <i class="iconfont icon-jiantouyou" @click="er"></i>
           </div>
 					<van-popup v-model="time" position="bottom" :style="{ height: '30%'}">
 						<div class="birthday-cs-one">
-							<van-datetime-picker v-model="currentDate" type="date" :min-date="minDate"/>
+							<van-datetime-picker @change="change" :formatter="formatter" @confirm="confirm" @cancel="cancel" v-model="currentDate" type="date" :min-date="minDate"/>
 						</div>
 					</van-popup>
         </div>
-				
         <div class="sex-cs" >
           <span  @click="showPopup">性别</span>
-          <div>
-            <span @click="showPopup">保密</span>
+          <div @click="showPopup">
+            <span @click="showPopup">{{sex}}</span>
             <i class="iconfont icon-jiantouyou" @click="showPopup"></i>
           </div>
-					<van-popup v-model="show" position="bottom" :style="{ height: '30%'}">
-						<div class="sec-cs-one">
-							<div class="sec-cs-one-one"><a><span>男</span></a></div>
-							<div class="sec-cs-one-one"><a><span>女</span></a></div>
-							<div class="sec-cs-one-one"><a><span>保密</span></a></div>
-							<div class="sec-cs-one-two"><a><span>取消</span></a></div>
-						</div>
-						
-					</van-popup>
         </div>
+        <van-action-sheet
+          v-model="show"
+          :actions="actions"
+          @select="onSelect"
+          cancel-text="取消"
+          :close-on-click-action=true
+        />
       </div>
     </div>
 </template>
@@ -85,14 +75,49 @@
 			data() {
     return {
       show: false,
+      showdown:false,
 			pushow:false,
 			time:false,
 			nichen:false,
-			currentDate: new Date()
+			currentDate: new Date(),
+      fileList:[],
+      minDate: new Date(),
+      birsday:"2019年02月03日",
+      actions:[
+        { name: '男' },
+        { name: '女' },
+        { name: '保密'}
+      ],
+      sex:"男"
 	    }
   },
 
   methods: {
+    onSelect(item) {
+      // 点击选项时默认不会关闭菜单，可以手动关闭
+      this.showdown = false;
+      this.sex=item.name;
+    },
+    confirm(){
+      this.time=!this.time
+    },
+    cancel(){
+      this.time=!this.time
+    },
+    change(e){
+      this.birsday=e.getValues().join("")
+    },
+    formatter(type, value) {
+      if (type === 'year') {
+        return `${value}年`;
+      } else if (type === 'month') {
+        return `${value}月`
+      } else if (type === 'day') {
+        return `${value}日`
+      }
+      return value;
+    },
+
     showPopup() {
       this.show = true;
     },
@@ -104,10 +129,18 @@
 		},
 		nc(){
 			this.nichen=true;
-		}
-  }
-  
-  
+		},
+    afterRead(file) {
+      this.$refs.imgcs.src=file.content;
+      localStorage.setItem("xh_person_img",file.content)
+    }
+
+  },
+      mounted() {
+        this.$refs.imgcs.src=localStorage.getItem("xh_person_img")
+      }
+
+
     }
 </script>
 

@@ -14,19 +14,28 @@
             <span>购物车</span>
           </router-link>
         </div>
-        <p class="owProductsList"  >加入购物车</p>
+        <p class="owProductsList" @click="jionCart" >加入购物车</p>
         <p class="shProductsList"  >立即购买</p>
       </div>
     </div>
 </template>
 
 <script>
+
     export default {
-        name: "XhProductDetailfooter"
+      name: "XhProductDetailfooter",
+      props:["itemId"],
+      methods: {
+        jionCart() {
+          this.$toast('成功加入购物车');
+          this.$emit("jionCart")
+        }
+      }
     }
 </script>
 
 <style scoped>
   @import "../../assets/css/XhProductDetail.css";
+  /*@import "../../assets/css/XhStyleOne.css";*/
 
 </style>

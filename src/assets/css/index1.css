@@ -1,0 +1,230 @@
+/*首页整体样式*/
+.index-content{
+  background-color: #f7f7f7;
+}
+/*头部样式*/
+
+.index-content .xinhua-header{
+  height: 1.7rem;
+  width: 100%;
+  background-color:rgb(198, 47, 46);
+  transition: all .8s;
+}
+.index-content .xinhua-header header{
+  padding:0.1rem 0.3rem;
+}
+.index-content .header-title{
+  justify-content: space-between;
+}
+.index-content  .header-title img{
+  width: 2.6rem;
+  height: 0.8rem;
+  vertical-align: middle;
+}
+.index-content .header-title i {
+  font-size: 0.44rem;
+  color: #fff;
+  vertical-align: middle;
+  margin-top: 0.1rem;
+}
+.index-content .header-title a{
+  margin-top:0.1rem;
+}
+.index-content .header-search{
+  width: 100%;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  background-color: #fff;
+  margin:0 auto;
+  border-radius:4px ;
+  top:0;
+  z-index: 100;
+  vertical-align: middle;
+  transition: all .8s;
+}
+.index-content .header-search span{
+  left:0.2rem;
+  top:0;
+  font-size:0.26rem;
+  color:rgb(153, 153, 153);
+}
+.index-content .header-search i{
+  right:0.2rem;
+  top:0;
+  font-size:0.3rem;
+}
+/*中间部分*/
+.index-content main{
+  flex:1;
+  overflow-y:auto;
+}
+/*轮播图容器*/
+.index-content .index-banner .swiper-container1{
+  width: 100%;
+  height:auto;
+}
+.index-content .swiper-container1 img{
+  width: 100%;
+  height:auto;
+}
+.index-content #swiper-pagination1{
+  width: 4rem;
+  background: #00000014;
+  border-radius:.15rem ;
+  /*margin:0 auto;*/
+  left:25%;
+}
+/*导航*/
+.index-content .index-nav{
+  background-color: #fff;
+  padding:0.4rem 0 0.2rem;
+}
+.index-content .index-nav ul{
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.index-content .index-nav ul a{
+  width: 100%;
+}
+.index-content .index-nav ul a img{
+  width: 1rem ;
+}
+.index-content .index-nav ul a p{
+  margin-top:0.1rem;
+  color:#000;
+  font-size: 0.24rem;
+}
+/*主题*/
+.index-content .theme-content{
+  margin-top:0.01rem;
+  width: 100%;
+  justify-content: space-between;
+}
+.index-content .theme-content>div{
+  width: 50%;
+}
+.index-content .theme-content>div:last-child{
+  display: none;
+}
+.index-content .theme-list a{
+  display: block;
+  width: 100%;
+  height: 2.4rem;
+}
+.index-content .theme-content a img{
+  width:100%;
+  height:100%;
+}
+/*主要列表*/
+.index-content .index-list{
+  margin-top:0.1rem;
+  background-color: #fff;
+  width: 100%;
+}
+.index-content .index-list-title{
+  justify-content: space-between;
+}
+.index-content .index-list-title h3{
+  font-size:0.32rem;
+  color: rgb(54, 52, 51);
+  margin-top:0.2rem;
+  margin-left:0.2rem;
+}
+.index-content .index-list-title a{
+  font-size: 0.26rem;
+  color: rgb(153, 153, 153);
+  margin-right:0.2rem;
+}
+.index-content .more-page{
+  margin-top:0.2rem;
+}
+.index-content .index-list-box{
+  overflow-x:auto;
+  text-align: left;
+  margin-top:0.2rem;
+}
+.index-content .index-list-each{
+  width: 2rem;
+  flex-shrink: 0;
+  margin-left:0.2rem;
+  padding:0.1rem 0 0.2rem;
+}
+.index-content .index-list-each img{
+  width: 1.6rem;
+  height: 1.6rem;
+  margin:0 auto;
+}
+.index-content .index-list-each p{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  color:#000;
+  margin-top:0.1rem;
+  width: 1.8rem;
+}
+.index-content .index-list-each span{
+  display: block;
+  color:rgb(181, 13, 13);
+  margin-top:0.1rem;
+}
+/*新华优选*/
+.index-content .xh-banner img{
+  width: 100%;
+}
+.index-content .select-banner a img{
+  width: 100%;
+  /*height: 2rem;*/
+  height:auto;
+}
+.index-content .xh-select .index-list{
+  margin-top:0.3rem;
+}
+/*作者轮播图*/
+.index-content .author-banner .swiper-pagination1{
+  width: 2rem;
+  left:38%;
+  bottom:14px;
+}
+/*图书列表*/
+.index-content .book-classify{
+  background-color: #fff;
+}
+.index-content .book-classify>div section:nth-of-type(1) .index-list-box{
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding:0 0.3rem;
+}
+.index-content .book-classify>div section:nth-of-type(1) .index-list-box li{
+  width: 30%;
+}
+.index-content .book-classify>div section:nth-of-type(2) .index-list-box{
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding:0 0.3rem;
+}
+.index-content .book-classify>div section:nth-of-type(2) .index-list-box li{
+  width: 30%;
+}
+/*底部样式*/
+.footer-box{
+  height: 1.1rem;
+  background-color:  rgb(243, 243, 239);;
+  border-top:1px solid rgba(0, 0, 0, 0.3);
+}
+.footer-box ul{
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+.footer-box ul li a i{
+  font-size:0.4rem;
+  font-weight: 700;
+}
+.footer-box ul li p{
+  font-size: 0.26rem;
+}

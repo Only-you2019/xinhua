@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
  .XhThemePagesIcon-icons .swiper-container{
     height: 0;
     padding-bottom: 50%;

@@ -1,18 +1,22 @@
 <template>
       <div class="XhShoppingCartSubmit">
-        <van-checkbox v-model="checked" class="AllChecked" checked-color="#c72f2e">全选</van-checkbox>
+        <van-checkbox v-model="product.checked" class="AllChecked" checked-color="#c72f2e" @click="allChecke">全选</van-checkbox>
         <span class="AllPrice">合计：</span>
-        <span class="PriceNumber">￥45.60</span>
-        <button class="SubmitPrice">去结算(1)</button>
+        <span class="PriceNumber"><span>￥</span>{{allPrice}}</span>
+        <button class="SubmitPrice" @click="submitall">{{"去结算("+allNumber+")"}}</button>
       </div>
 </template>
 
 <script>
     export default {
         name: "XhShoppingCartSubmit",
-        data(){
-          return{
-            checked:true
+        props:["product","allPrice","allNumber"],
+        methods:{
+          allChecke(){
+            this.$emit("allChecked");
+          },
+          submitall(){
+            this.$emit("allsubmit");
           }
         }
     }
@@ -37,16 +41,15 @@
   .PriceNumber{
     float: left;
     margin-top: 0.36rem;
-    margin-left: 0.24rem;
     font-size: 0.3rem;
     color:#c72725;
   }
   .SubmitPrice{
-    float: left;
+    float: right;
     width: 2.1rem;
     height: 0.88rem;
     margin-top: 0.08rem;
-    margin-left: 0.26rem;
+    margin-right: 0.1rem;
     font-size: 0.34rem;
     color:#ffffff;
     text-align: center;

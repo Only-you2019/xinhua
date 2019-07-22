@@ -12,7 +12,7 @@
     }
 </script>
 
-<style scoped>
-  @import "../../assets/css/XhProductsList.css";
+<style>
+  /*@import "../../assets/css/XhProductsList.css";*/
 
 </style>

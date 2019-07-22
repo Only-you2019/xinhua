@@ -14,7 +14,7 @@
 		<div class="mine-content">
 				 <div class="XhMyOrder-Bigbox">
 				<h6>暂无浏览记录</h6>
-				<a href=""><span>随便逛逛</span></a>
+				<router-link to="/"><span>随便逛逛</span></router-link>
 			</div>
 		</div>
 	</div>
@@ -25,6 +25,7 @@
     export default {
         name: "XhHistory",
 		methods:{
+			 
 		    exitCs(){
 		      Dialog.confirm({
 		        title: '提示',
@@ -67,7 +68,7 @@
 	margin-right: .2rem;
 }
 .XhMyOrder-header-one span{
-	font-size: 18px !important;
+	font-size: 16px !important;
 	line-height: 1rem;
 }
 .XhMyOrder-header img{
@@ -107,15 +108,15 @@
 	.XhMyOrder-Bigbox a{
 		display: block;
 		width: 3rem;
-		height: 1rem;
+		height: .8rem;
 		background: #c62f2e;
 		margin-left: 1.2rem;
 		margin-top: .3rem;
 	}
 	.XhMyOrder-Bigbox span{
 		display: block;
-		font-size: 20px;
+		font-size: 18px;
 		color: white;
-		line-height: 1rem;
+		line-height: .8rem;
 	}
 </style>

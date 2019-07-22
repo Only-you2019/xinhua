@@ -9,7 +9,7 @@
         <van-button class="XhShoppingCartHeaderManage" span="4" offset="5" @click="manage">{{header}}</van-button>
       </van-row>
       <van-popup v-model="show" position="bottom">
-        <van-area :area-list="areaList"/>
+        <van-area :area-list="areaList" @cancel="cancel" @confirm="confirm"/>
       </van-popup>
     </div>
 </template>
@@ -22,7 +22,8 @@
         data() {
           return {
             areaList,
-            show: false
+            show: false,
+            value:''
           }
         },
         methods: {
@@ -31,6 +32,12 @@
           },
           manage(){
             this.$emit("manages");
+          },
+          cancel(){
+            this.show=false
+          },
+          confirm(){
+            this.show=false;
           }
         }
     }

@@ -5,7 +5,7 @@
     </p>
     <ul class="XhSearchPopular-list-wrapper">
       <li class="XhSearchPopular-list" v-for="(before,index) in searchBefore" :key="index">
-        <a class="XhSearchPopular-list-Jump" href="">{{before}}</a>
+        <a class="XhSearchPopular-list-Jump" href="" @click="searchToList(before)">{{before}}</a>
       </li>
     </ul>
   </div>
@@ -17,10 +17,17 @@
         props: {
           searchBefore:Array
         },
+      methods:{
+        searchToList(key){
+          this.$router.push({path: '/XhProductsList', query: {keyword: key}})
+        }
+      }
     }
 </script>
 
-<style scoped>
+<style>
+  /*@import "../../assets/css/XhStyleOne.css";*/
+
   .XhSearchPopular{
     width: 100%;
     margin-top:.75rem ;

@@ -1,9 +1,7 @@
 <template>
     <div class="XhNavPagesHeader">
         <div class="XhNavPagesHeader-return">
-            <router-link to="/">
-                <i class="iconfont XhNavPagesHeader-icon">&#xe625;</i>
-            </router-link>
+          <i class="iconfont XhNavPagesHeader-icon" @click="$router.back()">&#xe625;</i>
         </div>
         <div class="XhNavPagesHeader-text">
             <p>{{title}}</p>
@@ -20,7 +18,7 @@
     }
 </script>
 
-<style scoped>
+<style>
   .XhNavPagesHeader {
       display: flex;
       z-index: 9;

@@ -38,18 +38,20 @@
 </template>
 
 <script>
-    export default {
-        name: "XhGiftCards",
-      data() {
-        return {
-          active: 2
-        };
-      }
+  export default {
+    name: "XhGiftCards",
+    data() {
+      return {
+        active: 2
+      };
     }
+  }
 </script>
 
 <style scoped>
-  .XhGiftCards{
+  /*@import '../assets/css/XhStyleOne.css';*/
+
+  .XhGiftCards {
     width: 100%;
     height: 13.34rem;
     background-color: #f7f7f7;
@@ -57,12 +59,14 @@
 
 
   }
-  .XhGiftCards .xinhua_header{
-    width:100%;
+
+  .XhGiftCards .xinhua_header {
+    width: 100%;
     height: 0.9rem;
     background-color: #f7f7f7;
   }
-  .XhGiftCards .xinhua_header a{
+
+  .XhGiftCards .xinhua_header a {
     display: inline-block;
     width: 15%;
     height: 100%;
@@ -72,7 +76,8 @@
     color: red;
 
   }
-  .XhGiftCards .xinhua_header span:nth-child(2){
+
+  .XhGiftCards .xinhua_header span:nth-child(2) {
     display: inline-block;
     width: 70%;
     height: 100%;
@@ -82,23 +87,25 @@
     color: #5a5a5a;
   }
 
-  .XhGiftCards .binding{
+  .XhGiftCards .binding {
     width: 95%;
     height: 0.85rem;
     background-color: #FFFFFF;
-    margin:  0 auto;
+    margin: 0 auto;
     border: 1px solid #eeeeee;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  .XhGiftCards .binding input{
+
+  .XhGiftCards .binding input {
     outline: none;
     border: none;
     font-size: 14px;
     padding-left: 0.2rem;
   }
-  .XhGiftCards .binding_right{
+
+  .XhGiftCards .binding_right {
     width: 1.4rem;
     height: 0.6rem;
     border: 1px solid #c62f2e;
@@ -109,18 +116,21 @@
     font-size: 14px;
     margin-right: 0.2rem;
   }
-  .XhGiftCards .nogift{
+
+  .XhGiftCards .nogift {
     width: 3rem;
     height: 3.1rem;
     text-align: center;
     margin: 3rem auto;
   }
-.XhGiftCards .nogift img{
-  width: 3rem;
-  height: 2.7rem;
-  border-radius: .2rem;
-}
-  .XhGiftCards .nogift P{
+
+  .XhGiftCards .nogift img {
+    width: 3rem;
+    height: 2.7rem;
+    border-radius: .2rem;
+  }
+
+  .XhGiftCards .nogift P {
     color: #999999;
     font-size: 14px;
   }

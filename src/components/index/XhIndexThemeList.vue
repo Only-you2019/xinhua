@@ -15,5 +15,5 @@
 </script>
 
 <style scoped>
-@import "../../assets/css/index.css";
+/*@import "../../assets/css/index.css";*/
 </style>

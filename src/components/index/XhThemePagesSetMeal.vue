@@ -64,7 +64,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   .XhThemePagesSetMeal {
     padding-bottom: 0.3rem;
     padding-top: 0.3rem;

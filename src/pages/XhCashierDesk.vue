@@ -13,7 +13,7 @@
       <ul class="paylist">
         <li class="payItem payable">
           <span class="payItem-size">应付金额</span>
-          <span class="pay-money payItem-size">{{payMoney}}</span>
+          <span class="pay-money payItem-size">{{"￥"+allPrice}}</span>
         </li>
         <li class="payItem">
           <span class="payItem-size">订单号</span>
@@ -48,12 +48,18 @@
     name: "XhCashierDesk",
     data() {
       return {
-        payMoney: "￥44.50",
-        orderCodea: "8888888"
+        allPrice:"",
+        orderCodea:"8888888"
       }
     },
+    created(){
+      this.dataLoading()
+    },
     methods: {
-
+      dataLoading(){
+        this.allPrice=this.$route.query.allPrice;
+        console.log(this.allPrice);
+      },
     }
   }
 </script>

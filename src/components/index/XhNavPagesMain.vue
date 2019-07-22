@@ -17,7 +17,7 @@
     }
 </script>
 
-<style scoped>
+<style>
   .XhNavPagesMain {
     padding-top: 0.25rem;
     flex: 1;

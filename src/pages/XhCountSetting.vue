@@ -1,7 +1,7 @@
 <template>
     <div class="XhCountSetting-cs">
       <div class="header-cs">
-        <span class="iconfont icon-fanhui" @click="$router.back()"></span>
+        <span class="iconfont icon-fanhui" @click="$router.push('/XHmine')"></span>
         <span class="set-cs">账户设置</span>
       </div>
       <div class="main-bottol-cs">
@@ -58,6 +58,7 @@
 
 <script>
   import { Dialog } from 'vant';
+  import api from '.././XinHuaApi'
     export default {
         name: "XhCountSetting",
       methods:{
@@ -68,6 +69,24 @@
               confirmButtonColor:"#c72f2e"
             }).then(() => {
               // on confirm
+              api.get('/api/xinhua/logout').then(data => {
+                // 判断http请求状态码,200为请求成功
+                if (data.status === 200) {
+                  // 判断接口请求是否成功 0为成功
+                  if (data.data.status === 0) {
+                    // 成功时接收数据
+                    sessionStorage.removeItem("mobile")
+                    this.$router.push("/")
+                    this.$toast('您已退出登录');
+                  } else {
+                    // 失败时打印错误信息
+                    console.log(data.data.err);
+                  }
+                }
+              }).catch(err => {
+                // 请求错误返回错误信息
+                console.log(err);
+              });
             }).catch(() => {
               // on cancel
             });
