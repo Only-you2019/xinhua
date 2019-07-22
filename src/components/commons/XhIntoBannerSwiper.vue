@@ -64,5 +64,5 @@ export default {
 </script>
 
 <style>
-/*@import "../../assets/css/XhBannerPages.css";*/
+@import "../../assets/css/XhBannerPages.css";
 </style>
