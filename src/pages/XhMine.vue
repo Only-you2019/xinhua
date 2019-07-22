@@ -145,6 +145,7 @@
           console.log(err)
         })
       },
+      //收藏
       getCollection(){
         api.get('/api/xinhua/collect').then(data => {
           if (data.status === 200) {
